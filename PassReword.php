@@ -37,19 +37,17 @@ if (isset($_POST["send"])){
     //2. パスワードが入力されていたら認証する
     //$dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8',$db['host'], $db['dbname']);
 
-    function check($PassWord){
-      if($PassWord < 8){
-        throw new Exception('パスワードは8桁以上で入力してください。');
-      }
-      if($PassWord > 16){
-        throw new Exception('パスワードは16桁以内で入力してください。')
+    function check($Pass){
+      if(($Pass < 8) or ($Pass > 16)){
+        throw new Exception('パスワードは8桁以上16桁以内で入力してください。');
       }
     }
 
     //3.エラー処理
     try {
       $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-      check($PassWord);
+      $Pass = strlen($_POST['PassWord']);
+      check($Pass);
       $stmt = $pdo->prepare('UPDATE user SET PassWord = ?');
       $PassWord = password_hash($PassWord, PASSWORD_DEFAULT);
       $stmt->bindvalue(1,$PassWord);
@@ -58,8 +56,8 @@ if (isset($_POST["send"])){
       header("Location: Return.php");
       exit();
 
-    } catch (PDOException $e) {
-      $errorMessage = 'データベースエラー';
+    } catch (Exception $e) {
+      $errorMessage = $e->getMessage();
     }
   } else if($_POST["PassWord"] != $_POST["PassWord2"]) {
     $errorMessage = 'パスワードに誤りがあります。';

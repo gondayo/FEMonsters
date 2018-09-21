@@ -34,30 +34,27 @@ if (isset($_POST["login"])) {
 		// 2. ユーザIDとパスワードが入力されていたら認証する
 		//$dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
 
-		function check($PassWord){
-			if($PassWord < 8){
-				throw new Exception('パスワードは8桁以上で入力してください。');
-			}
-			if($PassWord > 16){
-				throw new Exception('パスワードは16桁以内で入力してください。')
+		function check($Pass){
+			if(($Pass < 8) and ($Pass > 16)){
+				throw new Exception('パスワードは8桁以上16桁以内で入力してください。');
 			}
 		}
 
 		// 3. エラー処理
 		try {
 			$pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-			check($PassWord);
-			$stmt = $pdo->prepare('SELECT UserName, PassWord FROM user WHERE UserName = ?'); //*ではなく認証に必要な要素のみにする
+			$Pass = strlen($_POST['PassWord']);
+			check($Pass);
+			$stmt = $pdo->prepare('SELECT UserName,PassWord FROM user WHERE UserName = ?'); //*ではなく認証に必要な要素のみにする
 			$stmt->bindvalue(1,$UserName);
 			$stmt->execute();
 
 			$PassWord = $_POST["PassWord"];
 
 			if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$db_hashed_pwd = $row['password'];
-				$passwordHash = password_hash($db_hashed_pwd, PASSWORD_DEFAULT);
+
 				if (password_verify($PassWord, $row['PassWord'])) {
-					//$errorMessage = $password. '/'. $row['password'];  // 確認用
+
 					session_regenerate_id(true);
 
 					// 入力したユーザー名の確認
@@ -72,18 +69,18 @@ if (isset($_POST["login"])) {
 					exit();  // 処理終了
 				} else {
 					// 認証失敗
-					$errorMessage = 'ユーザー名あるいはパスワードに誤りがあります。';
+					$errorMessage = '1ユーザー名あるいはパスワードに誤りがあります。';
 				}
 			} else {
 				// 4. 認証成功なら、セッションIDを新規に発行する
 				// 該当データなし
 				$errorMessage = 'ユーザー名あるいはパスワードに誤りがあります。';
 			}
-		} catch (PDOException $e) {
-			$errorMessage = 'データベースエラー';
-			$errorMessage = $sql;
+		} catch (Exception $e) {
+			$errorMessage = $e->getMessage();
+			//$errorMessage = $sql;
 			 //$e->getMessage() でエラー内容を参照可能（デバック時のみ表示）
-			 echo $e->getMessage();
+			 //echo $e->getMessage();
 		}
 	}
 }
@@ -103,7 +100,7 @@ if (isset($_POST["login"])) {
 			<div class = "form-item">
 				<legend>ログインフォーム</legend>  <!-- グループの先頭には、<LEGEND>〜</LEGEND>で入力項目グループにタイトルをつけます。 -->
 				<div><font color="#ff0000"><?php echo htmlspecialchars($errorMessage, ENT_QUOTES); ?></font></div>
-				<label for="UserId">ユーザーID </label>
+				<label for="UserName">ユーザー名 </label>
 				<input type="text" id="UserName" name="UserName" placeholder="ユーザー名を入力" value="<?php if (!empty($_POST["UserName"])) {echo htmlspecialchars($_POST["UserName"], ENT_QUOTES);} ?>">  <!-- 初回起動はユーザーID空白にして、２回目以降はPOST送信したユーザーIDが保存されている。 -->
 				<br>
 				<br>
@@ -113,14 +110,14 @@ if (isset($_POST["login"])) {
 				<br>
 				<input type="submit" id="login" name="login" value="ログイン">
 				<br>
-				<input type="submit" id="exit" name="exit" value="戻る">
+
 				<br>
 				<a href = "forgot.php">パスワードを忘れた場合</a>
 			</fieldset>
 		</form>
 		<br>
-		<form action="SignUp.php">
-
+		<form action="top.html">
+				<input type="submit" id="exit" name="exit" value="戻る">
 		</form>
 	</body>
 </html>
