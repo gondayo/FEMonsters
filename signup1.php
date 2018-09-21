@@ -88,7 +88,7 @@ if (isset($_POST["signUp"])) {
                 <select name="SecretQuestion" required>
                   <option value="">選択してください</option>
                   <option value="pet">初めて飼ったペットの名前</option>
-                  <option value="drink">好きな飲み物</optino>
+                  <option value="drink">好きな飲み物</opti>
                   <option value="sports">好きなスポーツ</option>
                   <option value="subject">得意な科目</option>
                 </select>
