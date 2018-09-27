@@ -52,7 +52,7 @@ if (isset($_POST["submit"])){
       $QuestionAnser = $POST["QuestionAnser"];
 
       if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        if($UserId === $row['UserId'] && $SecretQuestion === $row['SecretQuestion'] && $QuestionAnser === $row['QuestionAnser']){
+        if($UserName === $row['UserName'] && $SecretQuestion === $row['SecretQuestion'] && $QuestionAnser === $row['QuestionAnser']){
           session_regenerate_id(true);
 
           // 入力したIDのユーザー名を取得
@@ -62,7 +62,7 @@ if (isset($_POST["submit"])){
 					//foreach ($stmt as $row) {
 						//$row['UserName'];  // ユーザー名
 					//}
-					$_SESSION["NAME"] = $row['UserName'];
+					$_SESSION["Name"] = $row['UserName'];
 
           header("Location: PassReword.php"); //再発行画面へ遷移
           exit();
@@ -99,7 +99,7 @@ if (isset($_POST["submit"])){
   <form id="ForgotForm" name="ForgotForm" action="" method="POST">
     <fieldset>
       <legend>パスワード変更</legend>
-      <label for="UserId">ユーザーIDを入力してください　</label>
+      <label for="UserName">ユーザー名を入力してください　</label>
       <input type="text" id="UserName" name="UserName" placeholder="ユーザー名を入力" value="">
       <br>
       <br>
