@@ -1,20 +1,22 @@
 //modal
 $(function(){
-  $('#use').change(function() {
+  $(".use").change(function() {
 
     //disabled属性の状態を取得する
-      var ItemNum = $('span').prop('value');
+      var ItemNum = $("li").prop("value");
       var ItemNum2 = ItemNum - 1;
       if(ItemNum2 === 0) {
         //disabled属性を付与する
-        $('button').prop('disabled, false');
+        $("button").prop("disabled, false");
       } else {
         //disabled属性を解除する
-        $('button').prop('disabled', true);
+        $("button").prop("disabled", true);
       }
   });
   //テキストリンクをクリックしたら
- $("#use").click(function(){
+ $(".use").click(function(){
+      var ItemName = $(".use").val();
+      $("div").prepend('<p>',$(ItemName),'を使用しますか？</p>');
       //body内の最後に<div id="modal-bg"></div>を挿入
      $("body").append('<div id="modal-bg"></div>');
 
@@ -28,7 +30,8 @@ $(function(){
       $("#modal-bg,#modal-main").click(function(){
           $("#modal-main,#modal-bg").fadeOut("slow",function(){
          //挿入した<div id="modal-bg"></div>を削除
-              $('#modal-bg').remove() ;
+              $("#modal-bg").remove() ;
+              $("p").remove('')
          });
 
         });

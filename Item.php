@@ -12,14 +12,15 @@ $errorMessage = "";
 // ユーザのアイテム情報をすべて表示する
 try {
 $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-  $stmt= $pdo->prepare('SELECT * FROM u_item WHERE UserId = 1');
+  $stmt= $pdo->prepare('SELECT * FROM u_item WHERE UserId = 1 ORDER BY ItemId ASC');
   //$stmt= $pdo->prepare('SELECT * FROM u_item WHERE UserId = ?');
   //$stmt->bindvalue(1.$UserId);
   $stmt->execute();
 
   } catch (Exception $e) {
     $errorMessage = $e->getMessage();
-  }
+}
+
 // ユーザのアイテム使用処理
 /*if (isset($_POST["ok"])){
   //1
@@ -65,20 +66,23 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
    <script src="Item.js"></script>
  </head>
  <body>
-   <div id="modal-main">
-     <p><?php echo $Items["ItemName"];?>を使用しますか？</p>
-     <button id="ok">使う</button>
-   </div>
+
    <ul>
 
+  <?php
+    foreach ($stmt as $Items){
+      ?>
+    <li ><span class = "ItemName"><?php echo $Items["ItemName"];?></span>
+        <span class = "ItemNum"><?php echo $Items["ItemNum"];?></span>
+        <button class="use"  name = "<?php echo $Items["ItemName"];?>" value= "<?php echo $Items["ItemId"];?>">使う</button>
+    </li>
    <?php
 
-   foreach ($stmt as $Items){?>
-     <li> <?php echo $Items["ItemName"];?>
-          <?php echo $Items["ItemNum"];?>
-         <button id="use" value=<?php echo $Items["ItemId"];?>>使う</button>
-     </li>
-   <?php } ?>
+  }  ?>
 
  </ul>
+ <div id="modal-main">
+   <button id="ok">使う</button>
+ </div>
  </body>
+</html>
