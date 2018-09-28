@@ -1,3 +1,15 @@
+<?php
+require 'Password.php';   // password_verfy()はphp 5.5.0以降の関数のため、バージョンが古くて使えない場合に使用
+// セッション開始
+session_start();
+
+// ログイン状態チェック
+if (!isset($_SESSION["NAME"])) {
+    header("Location: Logout.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -25,24 +37,32 @@
     <p>ccc</p>
   </div>
 <div class="header" id="contents">
-  <a href="top.html">FEmonsters</a>
-  <p><a id="modal-open"><img src="femonsters.png" alt="Manual"></a></p>
+<tr>
+  <a href="Logout.php">FEmonsters</a>
+  <p id="modal-open" style="display:inline;">Manual</p>
+</tr>
 </div>
 </header>
 <div class="users">
-  <a href="userdateil.html">ユーザー名</a>
+  <a href="userdateil.php">ユーザー名：<?php echo htmlspecialchars($_SESSION["NAME"], ENT_QUOTES); ?> </a>
+  <p style="display:inline">HP:<?php echo htmlspecialchars($_SESSION["NAME"], ENT_QUOTES); ?></p>
+  <p style="display:inline">お金:<?php echo htmlspecialchars($_SESSION["NAME"], ENT_QUOTES); ?></p>
 </div>
   <div class="left">
     <div class="game">
-      <object type="text/html" data="game.html"></object>
+      <object type="text/html" data="Map.html"></object>
     </div>
   </div>
   <div class="right">
     <div id="grow">
-      <div id="tabpage1">…… タブ1の中身 ……</div>
-      <div id="tabpage2">…… タブ2の中身 ……</div>
+      <div id="tabpage1">
+        <object type="text/html" data="Item.php" height="525px" width="100%"></object>
+      </div>
+      <div id="tabpage2">
+        <object type="text/html" data="shop.html" height="525px" width="100%"></object>
+      </div>
       <div id="tabpage3">
-        <object type="text/html" data="monsterlist.html" height="525px" width="100%"></object>
+        <object type="text/html" data="monsterlist.php" height="525px" width="100%"></object>
       </div>
       <div id="tabpage4">…… タブ4の中身 ……</div>
     </div>
