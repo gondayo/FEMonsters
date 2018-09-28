@@ -77,8 +77,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
         <button class="use"  name = "<?php echo $Items["ItemName"];?>" value= "<?php echo $Items["ItemId"];?>">使う</button>
     </li>
    <?php
-
-  }  ?>
+ }  ?>
 
  </ul>
  <div id="modal-main">
