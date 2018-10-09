@@ -123,7 +123,7 @@ if (isset($_POST["signUp"])) {
             </fieldset>
         </form>
         <br>
-        <form action="../top.html">
+        <form action="/TOP/top.html">
             <input type="submit" value="戻る">
         </form>
     </body>
