@@ -22,10 +22,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
 }
 
 // ユーザのアイテム使用処理
-/*if (isset($_POST["ok"])){
-  //1
-  //if($_POST["ItemNum"] === 0){
-   //$errorMessage = 'アイテムの所持数がありません';
+if (isset($_POST["ok"])){
 
   $ItemNum = "";
   $ItemId = "";
@@ -35,7 +32,6 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
       throw new Exception('アイテムの所持数がありません。');
     }
   }
-  //$dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
 
   try {
     $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
@@ -54,7 +50,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
   } catch (Exception $e) {
     $errorMessage = $e->getMessage();
   }
-}*/
+}
  ?>
 
 <!doctype html>
@@ -77,7 +73,8 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
         <button class="use"  name = "<?php echo $Items["ItemName"];?>" value= "<?php echo $Items["ItemId"];?>">使う</button>
     </li>
    <?php
- }  ?>
+    }
+      ?>
 
  </ul>
  <div id="modal-main">
