@@ -1,0 +1,25 @@
+body{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-image: url("background.png")
+}
+.window1{
+  top: 30%;
+  left: 30%;
+  background-color: rgb(26, 195, 91);
+}
+.botton{
+  background-color: rgb(9, 244, 106);
+}
+#login{
+  text-align: center;
+  width: 50%;
+}
+#new{
+  text-align: center;
+  width: 50%;
+
+}
