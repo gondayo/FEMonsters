@@ -1,9 +1,9 @@
 //modal
-$(function(){
+/*$(function(){
   $(".use").change(function() {
 
     //disabled属性の状態を取得する
-      var ItemNum = $("li").prop("value");
+      var ItemNum = $("button").prop("class");
       var ItemNum2 = ItemNum - 1;
       if(ItemNum2 === 0) {
         //disabled属性を付与する
@@ -12,7 +12,7 @@ $(function(){
         //disabled属性を解除する
         $("button").prop("disabled", true);
       }
-  });
+  });*/
   //テキストリンクをクリックしたら
  $(".use").click(function(){
       var ItemName = $(".use").val();
