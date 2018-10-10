@@ -1,8 +1,8 @@
 <?php
-require 'Password.php';   // password_verfy()はphp 5.5.0以降の関数のため、バージョンが古くて使えない場合に使用
+/*require '/TOP/LOGIN/PHP/Password.php';   // password_verfy()はphp 5.5.0以降の関数のため、バージョンが古くて使えない場合に使用
 // セッション開始
 session_start();
-
+*/
 // ログイン状態チェック
 if (!isset($_SESSION["NAME"])) {
     header("Location: Logout.php");
