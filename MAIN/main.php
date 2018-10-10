@@ -46,10 +46,10 @@
   <div class="right">
     <div id="grow">
       <div id="tabpage1">
-        <object type="text/html" data="/ITEM/PHP/Item.php" height="525px" width="100%"></object>
+        <object type="text/html" data="/MAIN/ITEM/PHP/Item.php" height="525px" width="100%"></object>
       </div>
       <div id="tabpage2">
-        <object type="text/html" data="/SHOP/PHP/shop.html" height="525px" width="100%"></object>
+        <object type="text/html" data="/MAIN/SHOP/HTML/shop.html" height="525px" width="100%"></object>
       </div>
       <div id="tabpage3">
         <object type="text/html" data="/MAIN/MONSTER/HTML/monsterlist.html" height="525px" width="100%"></object>
