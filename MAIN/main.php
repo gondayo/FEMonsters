@@ -1,4 +1,12 @@
+<?php
+session_start();
 
+// ログイン状態チェック
+if (!isset($_SESSION["NAME"])) {
+    header("Location: Logout.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -34,7 +42,7 @@
 </div>
 </header>
 <div class="users">
-  <a href="userdateil.php">ユーザー名：<?php echo htmlspecialchars($_SESSION["NAME"], ENT_QUOTES); ?> </a>
+  <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo htmlspecialchars($_SESSION["NAME"], ENT_QUOTES); ?> </a>
   <p style="display:inline">HP:<?php echo htmlspecialchars($_SESSION["NAME"], ENT_QUOTES); ?></p>
   <p style="display:inline">お金:<?php echo htmlspecialchars($_SESSION["NAME"], ENT_QUOTES); ?></p>
 </div>
