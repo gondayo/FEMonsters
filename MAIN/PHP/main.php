@@ -20,7 +20,7 @@ if (!isset($_SESSION["NAME"])) {
   <script src="Manual.js"></script>
   <title>FEmonsters</title>
 </head>
-<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="stylesheet" type="text/css" href="/MAIN/CSS/main.css">
 <body>
 <script src="main.js"></script>
 <header>
