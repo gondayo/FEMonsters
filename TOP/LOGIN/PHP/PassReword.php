@@ -48,9 +48,10 @@ if (isset($_POST["send"])){
       $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
       $Pass = strlen($_POST['PassWord']);
       check($Pass);
-      $stmt = $pdo->prepare('UPDATE user SET PassWord = ?');
+      $stmt = $pdo->prepare('UPDATE user SET PassWord = ? WHERE UserName = ');
       $PassWord = password_hash($PassWord, PASSWORD_DEFAULT);
       $stmt->bindvalue(1,$PassWord);
+      $stmt->bindvalue(2,$_SESSION["NAME"]);
       $stmt->execute();
 
       header("Location: Return.php");

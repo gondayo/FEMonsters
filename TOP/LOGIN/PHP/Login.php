@@ -116,7 +116,7 @@ if (isset($_POST["login"])) {
 			</fieldset>
 		</form>
 		<br>
-		<form action="top.html">
+		<form action="/TOP/top.html">
 				<input type="submit" id="exit" name="exit" value="戻る">
 		</form>
 	</body>

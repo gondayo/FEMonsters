@@ -123,11 +123,9 @@ if (isset($_POST["signUp"])) {
             </fieldset>
         </form>
         <br>
-<<<<<<< HEAD:TOP/SIGNUP/PHP/signup.php
-        <form action="../top.html">
-=======
+
         <form action="/TOP/top.html">
->>>>>>> origin/master:TOP/SIGNUP/PHP/signup.php
+
             <input type="submit" value="戻る">
         </form>
     </body>
