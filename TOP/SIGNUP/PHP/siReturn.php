@@ -21,7 +21,7 @@ $errorMessage = "";
     <h1>アカウント登録完了画面</h1>
     <div><?php echo htmlspecialchars($errorMessage, ENT_QUOTES); ?></div>
     <ul>
-      <li><a href="Login.php">ログイン画面に戻る</a></li>
+      <li><a href="../LOGIN/Login.php">ログイン画面に戻る</a></li>
     </ul>
   </body>
 </html>
