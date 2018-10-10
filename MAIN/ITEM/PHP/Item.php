@@ -59,7 +59,7 @@ if (isset($_POST["ok"])){
    <meta charset="UTF-8">
    <link href="Manual.css" rel="stylesheet">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <script src="Item.js"></script>
+   <script src="/MAIN/ITEM/JS/Item.js"></script>
  </head>
  <body>
 
