@@ -10,7 +10,7 @@
   <script src="Manual.js"></script>
   <title>FEmonsters</title>
 </head>
-<link rel="stylesheet" type="text/css" href="/MAIN/CSS/main.css">
+<link rel="stylesheet" type="text/css" href="/MAIN/main.css">
 <body>
 <script src="main.js"></script>
 <header>
@@ -40,19 +40,19 @@
 </div>
   <div class="left">
     <div class="game">
-      <object type="text/html" data="Map.html"></object>
+      <object type="text/html" data="/MAIN/MAP/HTML/Map.html"></object>
     </div>
   </div>
   <div class="right">
     <div id="grow">
       <div id="tabpage1">
-        <object type="text/html" data="Item.php" height="525px" width="100%"></object>
+        <object type="text/html" data="/ITEM/PHP/Item.php" height="525px" width="100%"></object>
       </div>
       <div id="tabpage2">
-        <object type="text/html" data="shop.html" height="525px" width="100%"></object>
+        <object type="text/html" data="/SHOP/PHP/shop.html" height="525px" width="100%"></object>
       </div>
       <div id="tabpage3">
-        <object type="text/html" data="monsterlist.php" height="525px" width="100%"></object>
+        <object type="text/html" data="/MAIN/MONSTER/HTML/monsterlist.html" height="525px" width="100%"></object>
       </div>
       <div id="tabpage4">…… タブ4の中身 ……</div>
     </div>
