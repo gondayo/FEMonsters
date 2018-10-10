@@ -69,8 +69,8 @@ if (isset($_POST["ok"])){
     foreach ($stmt as $Items){
       ?>
     <li ><span class = "ItemName"><?php echo $Items["ItemName"];?></span>
-        <span class = "ItemNum"><?php echo $Items["ItemNum"];?></span>
-        <button class="use"  name = "<?php echo $Items["ItemName"];?>" value= "<?php echo $Items["ItemId"];?>">使う</button>
+        <span class = "ItemNum" value="<?php echo $Items["ItemNum"];?>"><?php echo $Items["ItemNum"];?></span>
+        <button class="use"  name = "<?php echo $Items["ItemName"];?>" value= "<?php echo $Items["ItemName"];?>">使う</button>
     </li>
    <?php
     }
@@ -78,7 +78,7 @@ if (isset($_POST["ok"])){
 
  </ul>
  <div id="modal-main">
-   <button id="ok">使う</button>
+
  </div>
  </body>
 </html>
