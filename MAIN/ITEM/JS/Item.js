@@ -16,7 +16,12 @@
   //テキストリンクをクリックしたら
  $(".use").click(function(){
       var ItemName = $(".use").val();
-      $("div").prepend('<p>',$(ItemName),'を使用しますか？</p>');
+      var ItemNum = $(".ItemNum").val();
+      if(ItemNum === 0){
+      $("div").prepend('<p>',$(ItemName),'を使用しますか？</p><button disabled id="ok">使う</button>');
+    } else {
+      $("div").prepend('<p>',$(ItemName),'を使用しますか？</p><button id="ok">使う</button>');
+    }
       //body内の最後に<div id="modal-bg"></div>を挿入
      $("body").append('<div id="modal-bg"></div>');
 
