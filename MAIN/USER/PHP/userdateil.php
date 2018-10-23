@@ -1,44 +1,35 @@
 <?php
-
 session_start();
 
+//DBの設定した内容
 define('DB_DSN','mysql:dbname=femonsters09_db;host=mysql1.php.xdomain.ne.jp;charset=utf8');
 define('DB_USER','femonsters09_yk');
 define('DB_PASSWORD','g015c1316');
 
+// エラーメッセージの初期化
+$errorMessage = "";
+
+// ユーザー情報をすべて表示する
 try {
-    $dbh = new PDO($dns, $user, $password,
-        array(
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-    );
-    if ($dbh == null) {
-        print_r('接続失敗').PHP_EOL;
-    } else {
-        print_r('接続成功').PHP_EOL;
-    }
-} catch(PDOException $e) {
-    echo('Connection failed:'.$e->getMessage());
-    die();
+  $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
+    $UserName = $_SESSION["NAME"];
+    $stmt = $pdo->prepare('SELECT UserName,HitPoint,Gold FROM user WHERE UserName = ?');
+    $stmt->bindvalue(1,$UserName);
+    $stmt->execute();
+
+    $User=$stmt->fetch(PDO::FETCH_ASSOC);
+
+  } catch (Exception $e) {
+ $errorMessage = $e->getMessage();
 }
-    $sql = 'SHOW TABLES';
-    $stmt = $dbh->query($sql);
 
-    while ($result = $stmt->fetch(PDO::FETCH_NUM)){
-        $table_names[] = $result[0];
-    }
+// ログイン状態チェック
+/*if (!isset($_SESSION["NAME"])) {
+    header("Location: Logout.php");
+    exit;
+}
 
-    $table_data = array();
-    foreach ($table_names as $key => $val) {
-        $sql2 = "SELECT * FROM $val;";
-        $stmt2 = $dbh->query($sql2);
-        $table_data[$val] = array();
-        while ($result2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
-            foreach ($result2 as $key2 => $val2) {
-                $table_data[$val][$key2] = $val2;
-            }
-        }
-    }
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -51,16 +42,9 @@ try {
 <body>
 
 <ul>
-  <?php
-    foreach ($table_data as $key => $val){
-      ?>
-
-<p style="display:inline">ユーザー名：<span class = "UserName"><?php echo $users["UserName"];?></span></p>
-<p style="display:inline">HP:<span class = "HitPoint"><?php echo $users["HitPoint"];?></span></p>
-<p style="display:inline">お金:<span class = "Gold"><?php echo $users["Gold"];?></span></p>
-
-<?php
-}  ?>
+  <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?> </a>
+  <p style="display:inline">HP:<?php echo htmlspecialchars($User["HitPoint"], ENT_QUOTES, 'UTF-8');?></p>
+  <p style="display:inline">お金:<?php echo htmlspecialchars($User["Gold"], ENT_QUOTES, 'UTF-8');?></p>
 </ul>
 <a href="/MAIN/Logout.php">ログアウト</a>
 <a href="/MAIN/main.php">ゲームへ戻る</a>
