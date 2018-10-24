@@ -1,6 +1,6 @@
 //modal
-/*$(function(){
-  $(".use").change(function() {
+$(function(){
+  /*$(".use").change(function() {
 
     //disabled属性の状態を取得する
       var ItemNum = $("button").prop("class");
@@ -11,32 +11,43 @@
       } else {
         //disabled属性を解除する
         $("button").prop("disabled", true);
+      }*/
+      function escapeSelectorString(val){
+        return val.replace(/[ !"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~]/g, "\\$&");
       }
-  });*/
   //テキストリンクをクリックしたら
- $(".use").click(function(){
-      var ItemName = $(".use").val();
-      var ItemNum = $(".ItemNum").val();
-      if(ItemNum === 0){
-      $("div").prepend('<p>',$(ItemName),'を使用しますか？</p><button disabled id="ok">使う</button>');
-    } else {
-      $("div").prepend('<p>',$(ItemName),'を使用しますか？</p><button id="ok">使う</button>');
-    }
+ $(".use").on('click',function(){
+   var ItemId = $(this).attr("value");
+   var ItemName = $(this).attr("data-name");
+   var ItemNum = $(this).attr("data-num");
+
+   $("#UseItem").text(ItemName);
+   $("#UseNum").text(ItemNum);
+  //$("#UseNum").val(ItemNum);
+   if(ItemNum === 0){
+   $("#modal-window").append('<input type="submit" id="ok" name="ok" value="">');
+   $("#ok").val(ItemId);
+   //$("input").prop('disabled,true');
+ } else {
+   $("#modal-window").append('<input type="submit" id="ok" name="ok" value="">');
+   $("#ok").val(ItemId);
+   //$("input").prop('disabled,false');
+ }
       //body内の最後に<div id="modal-bg"></div>を挿入
-     $("body").append('<div id="modal-bg"></div>');
+     $("body").append('<div id="modal-background"></div>');
 
     //画面中央を計算する関数を実行
     modalResize();
 
     //モーダルウィンドウを表示
-        $("#modal-bg,#modal-main").fadeIn("slow");
+        $("#modal-background,#modal-window").fadeIn("slow");
 
     //画面のどこかをクリックしたらモーダルを閉じる
-      $("#modal-bg,#modal-main").click(function(){
-          $("#modal-main,#modal-bg").fadeOut("slow",function(){
+      $("#modal-background,#modal-window").click(function(){
+          $("#modal-window,#modal-background").fadeOut("slow",function(){
          //挿入した<div id="modal-bg"></div>を削除
-              $("#modal-bg").remove() ;
-              $("p").remove('')
+              $("#modal-background").remove() ;
+              $("#ok").remove();
          });
 
         });
@@ -48,14 +59,15 @@
             var w = $(window).width();
           var h = $(window).height();
 
-            var cw = $("#modal-main").outerWidth();
-           var ch = $("#modal-main").outerHeight();
+            var cw = $("#modal-window").outerWidth();
+           var ch = $("#modal-window").outerHeight();
 
         //取得した値をcssに追加する
-            $("#modal-main").css({
+            $("#modal-window").css({
                 "left": ((w - cw)/2) + "px",
                 "top": ((h - ch)/2) + "px"
           });
      }
+
    });
 });

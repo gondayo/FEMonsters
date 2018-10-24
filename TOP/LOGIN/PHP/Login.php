@@ -99,9 +99,9 @@ if (isset($_POST["login"])) {
 			<fieldset> <!-- fieldsetはグループ化してくれる(線で囲ってくれる) -->
 			<div class = "form-item">
 				<legend>ログインフォーム</legend>  <!-- グループの先頭には、<LEGEND>〜</LEGEND>で入力項目グループにタイトルをつけます。 -->
-				<div><font color="#ff0000"><?php echo htmlspecialchars($errorMessage, ENT_QUOTES); ?></font></div>
+				<div><font color="#ff0000"><?php echo htmlspecialchars($errorMessage, ENT_QUOTES,'UTF-8'); ?></font></div>
 				<label for="UserName">ユーザー名 </label>
-				<input type="text" id="UserName" name="UserName" placeholder="ユーザー名を入力" value="<?php if (!empty($_POST["UserName"])) {echo htmlspecialchars($_POST["UserName"], ENT_QUOTES);} ?>">  <!-- 初回起動はユーザーID空白にして、２回目以降はPOST送信したユーザーIDが保存されている。 -->
+				<input type="text" id="UserName" name="UserName" placeholder="ユーザー名を入力" value="<?php if (!empty($_POST["UserName"])) {echo htmlspecialchars($_POST["UserName"], ENT_QUOTES,'UTF-8');} ?>">  <!-- 初回起動はユーザーID空白にして、２回目以降はPOST送信したユーザーIDが保存されている。 -->
 				<br>
 				<br>
 				<label for="PassWord">パスワード </label>

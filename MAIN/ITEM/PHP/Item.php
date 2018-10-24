@@ -12,9 +12,14 @@ $errorMessage = "";
 // ユーザのアイテム情報をすべて表示する
 try {
 $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-  $stmt= $pdo->prepare('SELECT * FROM u_item WHERE UserId = 1 ORDER BY ItemId ASC');
+  $UserName = $_SESSION["NAME"];
+  $stmta = $pdo->prepare('SELECT UserId FROM user WHERE UserName = ?');
+  $stmta->bindvalue(1,$UserName);
+  $stmta->execute();
+  $UserId = $stmta->fetch(PDO::FETCH_ASSOC);
+  $stmt = $pdo->prepare('SELECT * FROM u_item WHERE UserId = ? ORDER BY ItemId ASC');
   //$stmt= $pdo->prepare('SELECT * FROM u_item WHERE UserId = ?');
-  //$stmt->bindvalue(1.$UserId);
+  $stmt->bindvalue(1,(int)$UserId["UserId"],PDO::PARAM_INT);
   $stmt->execute();
 
   } catch (Exception $e) {
@@ -24,8 +29,8 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
 // ユーザのアイテム使用処理
 if (isset($_POST["ok"])){
 
-  $ItemNum = "";
-  $ItemId = "";
+  $ItemNum = $_POST["UseNum"];
+  $ItemId = $_POST["ok"];
 
   function check($ItemNum){
     if($ItemNum === 0){
@@ -36,18 +41,18 @@ if (isset($_POST["ok"])){
   try {
     $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
     check($ItemNum);
-    $ItemNum = $ItemNum - 1;
+    $ItemNum = --$ItemNum;
 
-    $stmt = $pdo->prepare('UPDATE u_item SET ItemNum = ?');
+    $stmt = $pdo->prepare('UPDATE u_item SET ItemNum = ? WHERE ItemId = ? AND UserId = ?');
     $stmt->bindvalue(1,(int)$ItemNum,PDO::PARAM_INT);
+    $stmt->bindvalue(2,(int)$ItemId,PDO::PARAM_INT);
+    $stmt->bindvalue(3,(int)$UserId["UserId"],PDO::PARAM_INT);
     $stmt->execute();
     //この時点でアイテム使用フラグをu_itemに送りダンジョンクリア後にフラグ消去のほうが良い？
-    $stmt = $pdo->prepare('SELECT * FROM item_library WHERE ItemId = ?');
-    $stmt->bindvalue(1,(int)$ItemId,PDO::PARAM_INT);
-    $stmt->execute();
 
-    //以下条件分岐で効果を変える処理
-  } catch (Exception $e) {
+    header("Location: Itemcheck.php");
+    exit();
+      } catch (Exception $e) {
     $errorMessage = $e->getMessage();
   }
 }
@@ -57,7 +62,7 @@ if (isset($_POST["ok"])){
 <html>
  <head>
    <meta charset="UTF-8">
-   <link href="Manual.css" rel="stylesheet">
+   <link href="/MAIN/ITEM/CSS/Item.css" rel="stylesheet">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="/MAIN/ITEM/JS/Item.js"></script>
  </head>
@@ -65,20 +70,23 @@ if (isset($_POST["ok"])){
 
    <ul>
 
-  <?php
+   <?php
     foreach ($stmt as $Items){
       ?>
-    <li ><span class = "ItemName"><?php echo $Items["ItemName"];?></span>
-        <span class = "ItemNum" value="<?php echo $Items["ItemNum"];?>"><?php echo $Items["ItemNum"];?></span>
-        <button class="use"  name = "<?php echo $Items["ItemName"];?>" value= "<?php echo $Items["ItemName"];?>">使う</button>
+    <li><span class="ItemName"><?php echo htmlspecialchars($Items["ItemName"], ENT_QUOTES, 'UTF-8');?></span>
+        <span class="ItemNum"><?php echo htmlspecialchars($Items["ItemNum"], ENT_QUOTES, 'UTF-8');?></span>
+        <button class="use" data-name="<?php echo htmlspecialchars($Items["ItemName"], ENT_QUOTES, 'UTF-8');?>" data-num="<?php echo htmlspecialchars($Items["ItemNum"], ENT_QUOTES, 'UTF-8');?>"value="<?php echo htmlspecialchars($Items["ItemId"], ENT_QUOTES, 'UTF-8');?>">使う</button>
     </li>
    <?php
     }
       ?>
 
- </ul>
- <div id="modal-main">
-
- </div>
+  </ul>
+  <form method="POST">
+   <div id="modal-window">
+     <span id="UseItem"></span><span class="check">を使用しますか？</span>
+     <span id="UseNum" name="UseNum"></span><span class="check">個</span>
+   </div>
+  </form>
  </body>
 </html>
