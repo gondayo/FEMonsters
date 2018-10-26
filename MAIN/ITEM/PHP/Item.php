@@ -11,7 +11,7 @@ $errorMessage = "";
 
 // ユーザのアイテム情報をすべて表示する
 try {
-$pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
+  $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
   $UserName = $_SESSION["NAME"];
   $stmta = $pdo->prepare('SELECT UserId FROM user WHERE UserName = ?');
   $stmta->bindvalue(1,$UserName);
@@ -22,8 +22,8 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
   $stmt->bindvalue(1,(int)$UserId["UserId"],PDO::PARAM_INT);
   $stmt->execute();
 
-  } catch (Exception $e) {
-    $errorMessage = $e->getMessage();
+} catch (Exception $e) {
+  $errorMessage = $e->getMessage();
 }
 
 // ユーザのアイテム使用処理
@@ -72,14 +72,15 @@ if (isset($_POST["ok"])){
 
    <?php
     foreach ($stmt as $Items){
-      ?>
-    <li><span class="ItemName"><?php echo htmlspecialchars($Items["ItemName"], ENT_QUOTES, 'UTF-8');?></span>
+   ?>
+    <li>
+        <span class="ItemName"><?php echo htmlspecialchars($Items["ItemName"], ENT_QUOTES, 'UTF-8');?></span>
         <span class="ItemNum"><?php echo htmlspecialchars($Items["ItemNum"], ENT_QUOTES, 'UTF-8');?></span>
         <button class="use" data-name="<?php echo htmlspecialchars($Items["ItemName"], ENT_QUOTES, 'UTF-8');?>" data-num="<?php echo htmlspecialchars($Items["ItemNum"], ENT_QUOTES, 'UTF-8');?>"value="<?php echo htmlspecialchars($Items["ItemId"], ENT_QUOTES, 'UTF-8');?>">使う</button>
     </li>
    <?php
     }
-      ?>
+   ?>
 
   </ul>
   <form method="POST">

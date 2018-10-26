@@ -16,7 +16,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
   $stmta = $pdo->prepare('SELECT UserId FROM user WHERE UserName = ?');
   $stmta->bindvalue(1,$UserName);
   $stmta->execute();
-  $UserId = $stmta->fetch(PDO::FETCH_ASSOC);
+  $monster = $stmta->fetch(PDO::FETCH_ASSOC);
   $stmt = $pdo->prepare('SELECT * FROM u_monster JOIN monster_library WHERE UserId = ? ORDER BY monsterId ASC');
   $stmt->bindvalue(1,(int)$UserId["UserId"],PDO::PARAM_INT);
   $stmt->execute();
@@ -35,24 +35,19 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
 </head>
 <link rel="stylesheet" type="text/css" href="/MAIN/MONSTER/CSS/monsterlist.css">
 <body>
-  <?php
-   foreach ($stmt as $monster){
-     ?>
+
   <div class="mons_link">
     <div class="mons_img">
       <a href="monsterdateil.html">
-        <img src="<?php echo htmlspecialchars($User["MonsterPic"], ENT_QUOTES, 'UTF-8');?></p>" height="100px" width="100px" alt="モンスター画像" >
+        <img src="<?php echo htmlspecialchars($monster["MonsterPic"], ENT_QUOTES, 'UTF-8');?>" height="100px" width="100px" alt="モンスター画像" >
       </a>
   </div>
   <div class="mons_name">
     <a href="monsterdateil.html"class="mons_name_a">
-      <?php echo htmlspecialchars($User["MonsterId"], ENT_QUOTES, 'UTF-8');?>
-      <?php echo htmlspecialchars($User["MonsterName"], ENT_QUOTES, 'UTF-8');?>
+      <?php echo htmlspecialchars($monster["MonsterId"], ENT_QUOTES, 'UTF-8');?>
+      <?php echo htmlspecialchars($monster["MonsterName"], ENT_QUOTES, 'UTF-8');?>
     </a>
   </div>
-  <?php
-   }
-     ?>
 
 </div>
 </body>
