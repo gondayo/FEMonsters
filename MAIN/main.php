@@ -86,7 +86,7 @@ try {
         <object type="text/html" data="/MAIN/SHOP/HTML/shop.html" height="525px" width="100%"></object>
       </div>
       <div id="tabpage3">
-        <object type="text/html" data="/MAIN/MONSTER/HTML/monsterlist.html" height="525px" width="100%"></object>
+        <object type="text/html" data="/MAIN/MONSTER/PHP/monsterlist.php" height="525px" width="100%"></object>
       </div>
       <div id="tabpage4">…… タブ4の中身 ……</div>
     </div>
