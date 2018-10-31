@@ -12,14 +12,14 @@ $(function(){
         //disabled属性を解除する
         $("button").prop("disabled", true);
       }*/
-        function escapeSelectorString(val){
+        /*function escapeSelectorString(val){
         return val.replace(/[ !"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~]/g, "\\$&");
       }
 
       function escapeSelectorString(text){
       return text.replace(/[ !"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~]/g, "\\$&");
     }
-
+*/
 
   //テキストリンクをクリックしたら
  $(".use").on('click',function(){
@@ -40,9 +40,6 @@ $(function(){
    $("#ok").prop("disabled,false");
  }
 
-   //$("#ok").on('click', function(){
-
-  // });
       //body内の最後に<div id="modal-bg"></div>を挿入
      $("body").append('<div id="modal-background"></div>');
 

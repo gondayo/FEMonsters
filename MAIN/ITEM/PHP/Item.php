@@ -22,7 +22,6 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
   $stmta->execute();
   $UserId = $stmta->fetch(PDO::FETCH_ASSOC);
   $stmt = $pdo->prepare('SELECT * FROM u_item WHERE UserId = ? ORDER BY ItemId ASC');
-  //$stmt= $pdo->prepare('SELECT * FROM u_item WHERE UserId = ?');
   $stmt->bindvalue(1,(int)$UserId["UserId"],PDO::PARAM_INT);
   $stmt->execute();
 
@@ -35,7 +34,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
   if (isset($_POST["ok"])){
 
     //モーダルとクリックされたアイテム名の改ざん検知的なことをしたかった
-    if($_POST["ItemName"] === $_POST["data-name"]){
+    //if($_POST["ItemName"] === $_POST["data-name"]){
       $ItemName = $_POST["ItemName"];
 
       function check($ItemNum){
@@ -54,7 +53,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
       $stmta->execute();
       $ItemNum = $stmta->fetchAll(PDO::FETCH_COLUMN,0);
       check($ItemNum);
-      $ItemNum = $ItemNum - 1;
+      $ItemNum = --$ItemNum;
 
       //アイテム個数を減らす
       $stmt = $pdo->prepare('UPDATE u_item SET ItemNum = ? WHERE ItemName = ? AND UserId = ?');
@@ -65,17 +64,18 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
       //この時点でアイテム使用フラグをu_itemに送りダンジョンクリア後にフラグ消去のほうが良い？
 
       header("Location: Itemcheck.php");
-      exit();
         } catch (Exception $e) {
           $errorMessage = $e->getMessage();
       }
-      // セッションの変数のクリア
-      $_SESSION = array();
 
-      // セッションクリア
-      @session_destroy();
-    }
-  }
+    /*}else{
+    // セッションの変数のクリア
+    $_SESSION = array();
+
+    // セッションクリア
+    @session_destroy();
+  }*/
+}
  ?>
 
 <!doctype html>
@@ -87,27 +87,26 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
    <script src="/MAIN/ITEM/JS/Item.js"></script>
  </head>
  <body>
-   <form method="POST">
-   <ul>
 
+   <ul>
    <?php
     foreach ($stmt as $Items){
       ?>
     <li><span class="ItemName"><?php echo h($Items["ItemName"]);?></span>
         <span class="ItemNum"><?php echo h($Items["ItemNum"]);?></span><span>個</span>
-        <button type="submit" class="use" data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>" value="<?php echo h($Items["ItemName"]);?>">使う</button>
+        <button type="submit" class="use" data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>">使う</button>
     </li>
    <?php
     }
       ?>
-
     </ul>
-  </form>
+
   <form method="POST">
    <div id="modal-window">
      <span id="UseItem"></span><span class="check">を使用しますか？</span>
      <span id="UseNum" name="UseNum"></span><span class="check">個</span>
      <input id="Name" type="hidden" name="ItemName" value="">
+   </div>
   </form>
  </body>
 </html>
