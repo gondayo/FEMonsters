@@ -67,6 +67,8 @@ try {
 </header>
 <div class="users">
 
+  <?php var_dump($User["UserName"], ENT_QUOTES, 'UTF-8')?>
+
   <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?> </a>
   <p style="display:inline">HP:<?php echo htmlspecialchars($User["HitPoint"], ENT_QUOTES, 'UTF-8');?></p>
   <p style="display:inline">お金:<?php echo htmlspecialchars($User["Gold"], ENT_QUOTES, 'UTF-8');?></p>
