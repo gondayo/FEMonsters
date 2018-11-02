@@ -16,9 +16,9 @@ function h($str) {
 // ユーザのアイテム情報をすべて表示する
 try {
 $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-  $UserName = $_SESSION["NAME"];
-  $stmta = $pdo->prepare('SELECT UserId FROM user WHERE UserName = ?');
-  $stmta->bindvalue(1,$UserName);
+  $Auth = $_SESSION["UID"];
+  $stmta = $pdo->prepare('SELECT UserId FROM user WHERE Auth = ?');
+  $stmta->bindvalue(1,$Auth);
   $stmta->execute();
   $UserId = $stmta->fetch(PDO::FETCH_ASSOC);
   $stmt = $pdo->prepare('SELECT * FROM u_item WHERE UserId = ? ORDER BY ItemId ASC');
@@ -48,7 +48,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
 
       //アイテム名とアイテムIDで指定した個数を取得
       $stmta = $pdo->prepare('SELECT ItemNum FROM u_item WHERE ItemName = ? AND UserId = ?');
-      $stmta->bindvalue(1,$ItemName,PDO::PARAM_INT);
+      $stmta->bindvalue(1,$ItemName);
       $stmta->bindvalue(2,(int)$UserId["UserId"],PDO::PARAM_INT);
       $stmta->execute();
       $ItemNum = $stmta->fetchAll(PDO::FETCH_COLUMN,0);
@@ -58,7 +58,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
       //アイテム個数を減らす
       $stmt = $pdo->prepare('UPDATE u_item SET ItemNum = ? WHERE ItemName = ? AND UserId = ?');
       $stmt->bindvalue(1,(int)$ItemNum,PDO::PARAM_INT);
-      $stmt->bindvalue(2,$ItemName,PDO::PARAM_INT);
+      $stmt->bindvalue(2,$ItemName);
       $stmt->bindvalue(3,(int)$UserId["UserId"],PDO::PARAM_INT);
       $stmt->execute();
       //この時点でアイテム使用フラグをu_itemに送りダンジョンクリア後にフラグ消去のほうが良い？

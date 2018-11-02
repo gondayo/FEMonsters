@@ -32,7 +32,7 @@ $(function(){
    //$("#UseNum").val(ItemNum);
 
 
-   if(ItemNum === 0){
+   if(ItemNum == 0){
    $("#modal-window").append('<button type="submit" id="ok" name="ok">使う</button>');
    $("#ok").prop("disabled,true");
  } else {

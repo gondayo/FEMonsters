@@ -59,9 +59,15 @@ try {
 
 <h2><?php echo h($title); ?></h2>
 <form method="POST" action="answer.php">
-   <?php foreach($choices as $value){ ?>
-   <button type="input" name="choices" value="<?php echo h($value); ?>" /> <?php echo h($value); ?><br>
-   <?php } ?>
+   <?php
+    foreach($choices as $value){
+   ?>
+   <button type="submit" name="choices" value="<?php echo h($value); ?>" /> <?php echo h($value); ?>
+   <?php
+      if(i === 2){
+        ?>
+      }
+    } ?>
    <input type="hidden" name="answer" value="<?php echo h($answer); ?>">
    <button type="submit" value="回答する">回答する</button>
 </form>
