@@ -1,14 +1,11 @@
 body{
   position: relative;
-  height: 100%;
-  width: 100%;
-  background-size: 100%;
+  height: 560px;
+  width: 1000px;
   background-repeat: no-repeat;
   background-image: url("background.png")
 }
 .window1{
-  top: 30%;
-  left: 30%;
   background-color: rgb(26, 195, 91);
 }
 .botton{
@@ -16,10 +13,10 @@ body{
 }
 #login{
   text-align: center;
-  width: 50%;
+  width: 30%;
 }
 #new{
   text-align: center;
-  width: 50%;
+  width: 30%;
 
 }
