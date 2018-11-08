@@ -1,0 +1,15 @@
+#lifeBar {
+  display: inline-block;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  vertical-align: -0.2em;
+}
+
+#lifeBar::-webkit-progress-bar {
+    background: #ccc;
+}
+
+#lifeBar::-webkit-progress-value {
+  background-color: #00cc00;
+}
