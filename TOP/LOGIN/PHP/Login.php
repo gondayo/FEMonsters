@@ -40,6 +40,10 @@ if (isset($_POST["login"])) {
 			}
 		}
 
+		function random($length = 8){
+    	return substr(bin2hex(random_bytes($length)), 0, $length);
+		}
+
 		// 3. エラー処理
 		try {
 			$pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
@@ -64,7 +68,13 @@ if (isset($_POST["login"])) {
 					//foreach ($stmt as $row) {
 						//$row['UserName'];  // ユーザー名
 					//}
+					$auth = random();
+					$stmt = $pdo->prepare('UPDATE user SET Auth = ? WHERE UserName = ?');
+					$stmt->bindvalue(1,$auth);
+					$stmt->bindvalue(2,$UserName);
+					$stmt->execute();
 					$_SESSION["NAME"] = $row['UserName'];
+					$_SESSION["UID"] = $auth;
 					header("Location: /MAIN/main.php");  // メイン画面へ遷移
 					exit();  // 処理終了
 				} else {

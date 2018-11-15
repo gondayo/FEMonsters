@@ -23,13 +23,7 @@ try {
  $errorMessage = $e->getMessage();
 }
 
-// ログイン状態チェック
-/*if (!isset($_SESSION["NAME"])) {
-    header("Location: Logout.php");
-    exit;
-}
 
-*/
 ?>
 
 <!DOCTYPE html>

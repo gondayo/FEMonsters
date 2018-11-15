@@ -12,27 +12,34 @@ $(function(){
         //disabled属性を解除する
         $("button").prop("disabled", true);
       }*/
-      function escapeSelectorString(val){
+        /*function escapeSelectorString(val){
         return val.replace(/[ !"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~]/g, "\\$&");
       }
+
+      function escapeSelectorString(text){
+      return text.replace(/[ !"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~]/g, "\\$&");
+    }
+*/
+
   //テキストリンクをクリックしたら
  $(".use").on('click',function(){
-   var ItemId = $(this).attr("value");
    var ItemName = $(this).attr("data-name");
    var ItemNum = $(this).attr("data-num");
 
    $("#UseItem").text(ItemName);
    $("#UseNum").text(ItemNum);
-  //$("#UseNum").val(ItemNum);
-   if(ItemNum === 0){
-   $("#modal-window").append('<input type="submit" id="ok" name="ok" value="">');
-   $("#ok").val(ItemId);
-   //$("input").prop('disabled,true');
+   $("#Name").val(ItemName);
+   //$("#UseNum").val(ItemNum);
+
+
+   if(ItemNum == 0){
+   $("#modal-window").append('<button type="submit" id="ok" name="ok">使う</button>');
+   $("#ok").prop("disabled,true");
  } else {
-   $("#modal-window").append('<input type="submit" id="ok" name="ok" value="">');
-   $("#ok").val(ItemId);
-   //$("input").prop('disabled,false');
+   $("#modal-window").append('<button type="submit" id="ok" name="ok">使う</buuton>');
+   $("#ok").prop("disabled,false");
  }
+
       //body内の最後に<div id="modal-bg"></div>を挿入
      $("body").append('<div id="modal-background"></div>');
 
