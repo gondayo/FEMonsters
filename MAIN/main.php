@@ -23,13 +23,7 @@ try {
  $errorMessage = $e->getMessage();
 }
 
-// ログイン状態チェック
-/*if (!isset($_SESSION["NAME"])) {
-    header("Location: Logout.php");
-    exit;
-}
 
-*/
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +60,8 @@ try {
 </div>
 </header>
 <div class="users">
+
+  <?php var_dump($User["UserName"], ENT_QUOTES, 'UTF-8')?>
 
   <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?> </a>
   <p style="display:inline">HP:<?php echo htmlspecialchars($User["HitPoint"], ENT_QUOTES, 'UTF-8');?></p>
