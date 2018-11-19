@@ -94,7 +94,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
       ?>
     <li><span class="ItemName"><?php echo h($Items["ItemName"]);?></span>
         <span class="ItemNum"><?php echo h($Items["ItemNum"]);?></span><span>個</span>
-        <button type="submit" class="use" data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>">使う</button>
+        <button class="use" data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>">使う</button>
     </li>
    <?php
     }
