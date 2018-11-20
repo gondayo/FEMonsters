@@ -30,7 +30,7 @@ function h($str) {
   </script>
 <h2>クイズの結果</h2>
 <p>あなたの正解数は<?php echo h($result);?>です</p>
-<form action="Tec_quiz2.php">
+<form action="Tec_quiz.php">
 
     <input type="submit" value="戻る">
 </form>

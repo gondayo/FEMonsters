@@ -55,7 +55,7 @@ try {
   //問題数
   let x = 0;
   //正答数
-  let y = 0;
+  var y = 0;
   //問題表示
   let title = question_jq[array_key_jq[x]].Tec_QuestionText;
   let choices = [question_jq[array_key_jq[x]].Tec_Choices1, question_jq[array_key_jq[x]].Tec_Choices2, question_jq[array_key_jq[x]].Tec_Choices3, question_jq[array_key_jq[x]].Tec_Choices4];
