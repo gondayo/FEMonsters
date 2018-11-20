@@ -51,27 +51,28 @@ try {
       // プログレスバーを生成
         $('#progress').progressbar({
           value: 37,
-          max: 100
+          max: 90
         });
 
         var per =  $('#progress').progressbar('value') /
-          $('#progress').progressbar('option', 'max')
+          $('#progress').progressbar('option', 'min')
         $('#loading').text(Math.ceil(per * 100) + '秒');
 
       // 何度も使うので、変数に退避
         var p = $('#progress');
         var l = $('#loading');
         p.progressbar({
-          value: 100,
+          value: 90,
       // 値の変更をラベルにも反映
         change: function() {
           l.text(p.progressbar('value') + '秒');
         },
+
       // 完了時にダイアログボックスを表示
-        complete: function() {
+        /*complete: function() {
           window.alert('処理を完了しました！');
-        }
-        });
+        }:*/
+      });
 
       // 1秒おきにプログレスバーを更新
         var id = setInterval(function() {
@@ -79,8 +80,9 @@ try {
           p.progressbar('value', --v);
             if (v <= 0) { clearInterval(id) }
         }, 1000);
-
         });
+
+
     </script>
     <script src="../JS/buttle.js"></script>
 </head>
