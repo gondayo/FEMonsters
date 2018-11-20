@@ -15,17 +15,11 @@ function h($str) {
 
 // ユーザのアイテム情報をすべて表示する
 try {
-<<<<<<< HEAD
-  $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-  $UserName = $_SESSION["NAME"];
-  $stmta = $pdo->prepare('SELECT UserId FROM user WHERE UserName = ?');
-  $stmta->bindvalue(1,$UserName);
-=======
+
 $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
   $Auth = $_SESSION["UID"];
   $stmta = $pdo->prepare('SELECT UserId FROM user WHERE Auth = ?');
   $stmta->bindvalue(1,$Auth);
->>>>>>> a796fb265b46c0ec6fb96c9b52c02397dda301a4
   $stmta->execute();
   $UserId = $stmta->fetch(PDO::FETCH_ASSOC);
   $stmt = $pdo->prepare('SELECT * FROM u_item WHERE UserId = ? ORDER BY ItemId ASC');
@@ -98,17 +92,6 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
    <ul>
    <?php
     foreach ($stmt as $Items){
-<<<<<<< HEAD
-   ?>
-    <li>
-        <span class="ItemName"><?php echo htmlspecialchars($Items["ItemName"], ENT_QUOTES, 'UTF-8');?></span>
-        <span class="ItemNum"><?php echo htmlspecialchars($Items["ItemNum"], ENT_QUOTES, 'UTF-8');?></span>
-        <button class="use" data-name="<?php echo htmlspecialchars($Items["ItemName"], ENT_QUOTES, 'UTF-8');?>" data-num="<?php echo htmlspecialchars($Items["ItemNum"], ENT_QUOTES, 'UTF-8');?>"value="<?php echo htmlspecialchars($Items["ItemId"], ENT_QUOTES, 'UTF-8');?>">使う</button>
-    </li>
-   <?php
-    }
-   ?>
-=======
       ?>
     <li><span class="ItemName"><?php echo h($Items["ItemName"]);?></span>
         <span class="ItemNum"><?php echo h($Items["ItemNum"]);?></span><span>個</span>
@@ -118,7 +101,7 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
     }
       ?>
     </ul>
->>>>>>> a796fb265b46c0ec6fb96c9b52c02397dda301a4
+
 
   <form method="POST">
    <div id="modal-window">
