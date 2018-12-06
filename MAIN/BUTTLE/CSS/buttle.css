@@ -13,3 +13,11 @@
 #lifeBar::-webkit-progress-value {
   background-color: #00cc00;
 }
+
+#button {
+  display: block;
+  cursor: pointer;
+  width: 160px;
+  text-align: center;
+  border: 1px solid #232323;
+}

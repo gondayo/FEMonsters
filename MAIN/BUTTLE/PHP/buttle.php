@@ -79,16 +79,27 @@ try {
           var v = p.progressbar('value');
           p.progressbar('value', --v);
             if (v <= 0) { clearInterval(id) }
-        }, 1000);
-        });
+        }, 100);
 
+    });
 
+    var hp = 20;
+
+    function mainasu(){
+      --hp;
+      console.log(hp);
+    }
     </script>
     <script src="../JS/buttle.js"></script>
 </head>
 <body>
+  <p>ユーザー:<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?></p>
+  <input type="button" id="text-button" value="-1" onClick="mainasu()">
+  <p>HP:<script></script></p>
+
   <div id="progress"></div>
     <div id="loading"></div>
-  <progress id="lifeBar" value="0" max="100" min="0" optimum="100"></progress>
+  <progress id="lifeBar" value="0" max="80" min="0" optimum="80">
+  </progress>
 </body>
 </html>
