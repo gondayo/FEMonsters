@@ -30,6 +30,7 @@ try {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <title>戦闘</title>
     <link rel="stylesheet" href="../CSS/buttle.css">
     <link type="text/css" rel="stylesheet"
@@ -41,11 +42,11 @@ try {
         left: 50%;
       }
     </style>
-
     <script type="text/javascript"
       src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript"
       src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script src="../JS/result.js"></script>
     <script type="text/javascript">
       $(function() {
       // プログレスバーを生成
@@ -84,19 +85,66 @@ try {
     });
 
     var hp = 20;
+      $("#hit").text(hp);
 
-    function mainasu(){
-      --hp;
-      console.log(hp);
+    function damage(){
+      if(hp>1){
+        --hp;
+      $("#hit").text(hp);
+
+      }else{
+        //modal
+        $(function(){
+
+
+              //body内の最後に<div id="modal-bg"></div>を挿入
+             $("body").append('<div id="modal-bg"></div>');
+
+            //画面中央を計算する関数を実行
+            modalResize();
+
+            //モーダルウィンドウを表示
+                $("#modal-bg,#modal-main").fadeIn("slow");
+
+
+
+
+            //画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+             $(window).resize(modalResize);
+              function modalResize(){
+
+                    var w = $(window).width();
+                  var h = $(window).height();
+
+                    var cw = $("#modal-main").outerWidth();
+                   var ch = $("#modal-main").outerHeight();
+
+                //取得した値をcssに追加する
+                    $("#modal-main").css({
+                        "left": ((w - cw)/2) + "px",
+                        "top": ((h - ch)/2) + "px"
+                  });
+             }
+
+        });
+
+
+      }
+
     }
+
     </script>
     <script src="../JS/buttle.js"></script>
 </head>
 <body>
+  <div id="modal-main">
+    <h1>Result</h1>
+    <input type="button" name="" value="MAINへ戻る"　onclick="">
+  </div>
+  <p id="modal-open" >Result</p>
   <p>ユーザー:<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?></p>
-  <input type="button" id="text-button" value="-1" onClick="mainasu()">
-  <p>HP:<script></script></p>
-
+  <input type="button" id="text-button" value="-1" onClick="damage()">
+  <p>HP:<span id= "hit">20</span></p>
   <div id="progress"></div>
     <div id="loading"></div>
   <progress id="lifeBar" value="0" max="80" min="0" optimum="80">

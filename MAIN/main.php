@@ -33,7 +33,7 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="Manual.js"></script>
+  <script src="manual.js"></script>
   <title>FEmonsters</title>
 </head>
 <link rel="stylesheet" type="text/css" href="/MAIN/main.css">
@@ -64,8 +64,6 @@ try {
   <?php var_dump($User["UserName"], ENT_QUOTES, 'UTF-8')?>
 
   <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?> </a>
-  <p style="display:inline">HP:<?php echo htmlspecialchars($User["HitPoint"], ENT_QUOTES, 'UTF-8');?></p>
-  <p style="display:inline">お金:<?php echo htmlspecialchars($User["Gold"], ENT_QUOTES, 'UTF-8');?></p>
 
 </div>
   <div class="left">
@@ -79,7 +77,7 @@ try {
         <object type="text/html" data="/MAIN/ITEM/PHP/Item.php" height="525px" width="100%"></object>
       </div>
       <div id="tabpage2">
-        <object type="text/html" data="/MAIN/SHOP/HTML/shop.html" height="525px" width="100%"></object>
+        <object type="text/html" data="/MAIN/SHOP/SHOPBUY/shopbuy.php" height="525px" width="100%"></object>
       </div>
       <div id="tabpage3">
         <object type="text/html" data="/MAIN/MONSTER/PHP/monsterlist.php" height="525px" width="100%"></object>
