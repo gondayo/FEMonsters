@@ -138,8 +138,8 @@ try {
    <input type = "button" id = "choices4" class="choice" name="choices4" value="">
    <input type = "hidden" name = "answer" value = "">
  <div id="quiz-modal">
- <span id = "judge"></span>
- <span id = "answer"></span>
+   <span id = "judge"></span>
+   <span id = "answer"></span>
  <input id = "next" type = "button" name = "next" value = "次へ">
  </div>
 </body>

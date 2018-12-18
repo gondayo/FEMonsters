@@ -13,14 +13,13 @@ function h($str) {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 
-try {
-  $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
 
+    $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
 
+    $sql = 'SELECT UserId,Gold FROM user WHERE UserId = 4 ';
+    $value = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+    $gold = (int)$value["Gold"];
+  echo "\n--プリペアードステートメント--\n\n";
 
-  
-} catch (Exception $e) {
-   $errorMessage = $e->getMessage();
-}
-
+  var_dump($gold);
   ?>

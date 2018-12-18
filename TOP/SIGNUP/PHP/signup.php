@@ -66,8 +66,13 @@ if (isset($_POST["signUp"])) {
             $UserId = $pdo->lastinsertid();  // 登録した(DB側でauto_incrementした)IDを$useridに入れる
 
             //$signUpMessage = '登録が完了しました。あなたの登録IDは '. $userid. ' です。パスワードは '. $password. ' です。';  // ログイン時に使用するIDとパスワード
-
-
+            $stmt = $pdo->prepare("INSERT INTO u_item(UserId, ItemId, ItemNum, ItemName, ItemFlag) VALUES(?,1,0,'test1',1),(?,2,0,'test2',1),(?,3,0,'test3',1),(?,4,0,'test4',0),(?,5,0,'test5',0)");
+            $stmt->bindvalue(1,(int)$UserId,PDO::PARAM_INT);
+            $stmt->bindvalue(2,(int)$UserId,PDO::PARAM_INT);
+            $stmt->bindvalue(3,(int)$UserId,PDO::PARAM_INT);
+            $stmt->bindvalue(4,(int)$UserId,PDO::PARAM_INT);
+            $stmt->bindvalue(5,(int)$UserId,PDO::PARAM_INT);
+            $stmt->execute();
 
             header("Location: siReturn.php");
             exit();

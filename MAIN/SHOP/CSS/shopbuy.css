@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+#contents {
+  z-index: 0;
+  font-size: 16px;
+}
+
+
+#modal-open {
+  color: #cc0000;
+}
+/* モーダル コンテンツエリア */
+#modal-window {
+    display: none;
+    width: 100%;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #666666;
+    position: fixed;
+    z-index: 2;
+}
+#modal-window h1 {
+    background: #ededed;
+    padding: 20px;
+    border-radius: 5px 5px 0 0;
+    font-size: 1.2em;
+    margin-top: 0;
+    text-align: center;
+}
+/* モーダル 背景エリア */
+#modal-background {
+    display:none;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.5);
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 1;
+}
+html {
+    height:525px;
+}
+
+body {
+    width:100%;
+    height:100%;
+    background-image: url("../../../PICTURE/buybg.png");
+    background-repeat: no-repeat;
+}
+
+#u_gold {
+    width:100%;
+    position: relative;
+    z-index: 1;
+}
+#u_gold span {
+    position: absolute;
+    top: 98px;
+    right: 40px;
+    transform:translate(-50%,-50%);
+    margin:0;
+    padding:0;
+}
+#u_gold img {
+  position: absolute;
+  top: 10px; right:0%;
+}
