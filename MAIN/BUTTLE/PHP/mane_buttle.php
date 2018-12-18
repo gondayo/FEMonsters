@@ -23,6 +23,13 @@ try {
  $errorMessage = $e->getMessage();
 }
 
+//モータルウィンドウ用画面遷移　
+if(isset($_POST["mainback"])){
+
+  header("Location: /MAIN/main.php");
+  exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -46,7 +53,7 @@ try {
       src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript"
       src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script src="../JS/result.js"></script>
+    <script src="../JS/menu.js"></script>
     <script type="text/javascript">
       $(function() {
       // プログレスバーを生成
@@ -69,10 +76,6 @@ try {
           l.text(p.progressbar('value') + '秒');
         },
 
-      // 完了時にダイアログボックスを表示
-        /*complete: function() {
-          window.alert('処理を完了しました！');
-        }:*/
       });
 
       // 1秒おきにプログレスバーを更新
@@ -84,15 +87,21 @@ try {
 
     });
 
-    var hp = 20;
+    var hp = 28;
       $("#hit").text(hp);
+    var x = 10;
+      $("no").text(x);
+    var y = 3;
+    var z = 0;
+
+
 
     function damage(){
-      if(hp>1){
-        --hp;
+      z =  x - y;
+      hp -= z;
       $("#hit").text(hp);
+      if(hp<1){
 
-      }else{
         //modal
         $(function(){
 
@@ -124,27 +133,30 @@ try {
                         "left": ((w - cw)/2) + "px",
                         "top": ((h - ch)/2) + "px"
                   });
+
              }
 
         });
 
-
       }
 
     }
-
     </script>
     <script src="../JS/buttle.js"></script>
 </head>
 <body>
   <div id="modal-main">
     <h1>Result</h1>
-    <input type="button" name="" value="MAINへ戻る"　onclick="">
+    <form id = "mainbackform" method = "POST"><button type = "submit" name = "mainback" value = "b">MAPへ戻る</button></form>
   </div>
-  <p id="modal-open" >Result</p>
+  <input type="image" id="modal-open" src="../../../PICTURE/stop.png" name="メニュー" value="メニュー">
   <p>ユーザー:<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?></p>
-  <input type="button" id="text-button" value="-1" onClick="damage()">
-  <p>HP:<span id= "hit">20</span></p>
+  <p>
+    <input type="button" id="text-button" value="-1" onClick="damage()">
+  </p>
+
+  <p>HP:<span id= "hit"></span></p>
+  <p>問題数:<span id= "no"></span></p>
   <div id="progress"></div>
     <div id="loading"></div>
   <progress id="lifeBar" value="0" max="80" min="0" optimum="80">
