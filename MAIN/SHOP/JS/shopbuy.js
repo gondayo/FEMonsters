@@ -22,28 +22,21 @@ $(function(){
 */
 
   //テキストリンクをクリックしたら
- $(".use").on('click',function(){
-   var ItemName = $(this).attr("data-name");
-   var ItemNum = $(this).attr("data-num");
-   var ItemFlag = $(this).attr("data-flag");
+ $(".buy").on('click',function(){
+   var SItemName = $(this).attr("data-name");
+   var SItemPrice = $(this).attr("data-price");
 
+   $("#buyname").text(SItemName);
+   $("#total").text(SItemPrice);
+   $("#info1").val(SItemName);
+ $("select").change(function() {
+    var num = $(this).val();
+    total = num * SItemPrice;
+    $("#total").text(total);
+    $("#info2").val(total);
+    $("#info3").val(num)
+  });
 
-
-
-   if(ItemFlag == 1){
-     $("#modal-window").append('<span id="useitem"></span><span class="check">を使用しますか？</span><br>');
-     $("#modal-window").append('<span id="usenum" name="usenum"></span><span class="k">個</span>');
-     $("#modal-window").append('<button type="submit" id="ok" name="ok">使う</button><br>');
-     $("#modal-window").append('<p id="description">アイテム説明</p>')
-   } else {
-     $("#modal-window").append('<span id="useitem"></span><br>');
-     $("#modal-window").append('<span id="usenum" name="usenum"></span><span class="k">個</span><br>');
-     $("#modal-window").append('<p id="description">アイテム説明</p>')
-   }
-   $("#useitem").text(ItemName);
-   $("#usenum").text(ItemNum);
-   $("#name").val(ItemName);
-   //$("#UseNum").val(ItemNum);
       //body内の最後に<div id="modal-bg"></div>を挿入
      $("body").append('<div id="modal-background"></div>');
 
@@ -54,17 +47,10 @@ $(function(){
         $("#modal-background,#modal-window").fadeIn("slow");
 
     //画面のどこかをクリックしたらモーダルを閉じる
-      $("#modal-background,#modal-window").click(function(){
+      $("#modal-background,#itembuy").click(function(){
           $("#modal-window,#modal-background").fadeOut("slow",function(){
          //挿入した<div id="modal-bg"></div>を削除
               $("#modal-background").remove() ;
-              $("#useitem").remove();
-              $(".check").remove();
-              $("#usenum").remove();
-              $(".k").remove();
-              $("#description").remove();
-              $("#ok").remove();
-              $("br").remove();
          });
 
         });

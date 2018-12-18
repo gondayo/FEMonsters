@@ -16,10 +16,9 @@ function h($str) {
 // ユーザのアイテム情報をすべて表示する
 try {
 
-$pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-  $Auth = $_SESSION["UID"];
+  $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
   $stmta = $pdo->prepare('SELECT UserId FROM user WHERE Auth = ?');
-  $stmta->bindvalue(1,$Auth);
+  $stmta->bindvalue(1,$_SESSION["UID"]);
   $stmta->execute();
   $UserId = $stmta->fetch(PDO::FETCH_ASSOC);
   $stmt = $pdo->prepare('SELECT * FROM u_item WHERE UserId = ? ORDER BY ItemId ASC');
@@ -38,11 +37,9 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
     //if($_POST["ItemName"] === $_POST["data-name"]){
       $ItemName = $_POST["ItemName"];
 
-      function check($ItemNum){
-        if($ItemNum === 0){
-          throw new Exception('アイテムの所持数がありません。');
-        }
-      }
+      /*function check($ItemNum){
+
+      }*/
 
     try {
       $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
@@ -52,21 +49,25 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
       $stmta->bindvalue(1,$ItemName);
       $stmta->bindvalue(2,(int)$UserId["UserId"],PDO::PARAM_INT);
       $stmta->execute();
-      $ItemNum = $stmta->fetchAll(PDO::FETCH_COLUMN,0);
-      check($ItemNum);
-      $ItemNum = --$ItemNum;
+      $ItemNum = $stmta->fetch(PDO::FETCH_ASSOC);
+      if($ItemNum["ItemNum"] > 0){
+        $ItemNum["ItemNum"] = --$ItemNum["ItemNum"];
 
-      //アイテム個数を減らす
-      $stmt = $pdo->prepare('UPDATE u_item SET ItemNum = ? WHERE ItemName = ? AND UserId = ?');
-      $stmt->bindvalue(1,(int)$ItemNum,PDO::PARAM_INT);
-      $stmt->bindvalue(2,$ItemName);
-      $stmt->bindvalue(3,(int)$UserId["UserId"],PDO::PARAM_INT);
-      $stmt->execute();
-      //この時点でアイテム使用フラグをu_itemに送りダンジョンクリア後にフラグ消去のほうが良い？
+        //アイテム個数を減らす
+        $stmt = $pdo->prepare('UPDATE u_item SET ItemNum = ? WHERE ItemName = ? AND UserId = ?');
+        $stmt->bindvalue(1,(int)$ItemNum["ItemNum"],PDO::PARAM_INT);
+        $stmt->bindvalue(2,$ItemName);
+        $stmt->bindvalue(3,(int)$UserId["UserId"],PDO::PARAM_INT);
+        $stmt->execute();
+        //この時点でアイテム使用フラグをu_itemに送りダンジョンクリア後にフラグ消去のほうが良い？
 
-      header("Location: Itemcheck.php");
-        } catch (Exception $e) {
-          $errorMessage = $e->getMessage();
+        header("Location: Itemcheck.php");
+
+        }else{
+          throw new Exception('アイテムの所持数がありません。');
+        }
+      } catch (Exception $e) {
+        $errorMessage = $e->getMessage();
       }
 
     /*}else{
@@ -88,14 +89,14 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
    <script src="/MAIN/ITEM/JS/Item.js"></script>
  </head>
  <body>
-
+<div id="error"><font color="#ff0000"><?php echo h($errorMessage); ?></font></div>
    <ul>
    <?php
     foreach ($stmt as $Items){
       ?>
-    <li><span class="ItemName"><?php echo h($Items["ItemName"]);?></span>
-        <span class="ItemNum"><?php echo h($Items["ItemNum"]);?></span><span>個</span>
-        <button class="use" data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>">使う</button>
+    <li><span class="itemname"><?php echo h($Items["ItemName"]);?></span>
+        <span class="itemnum"><?php echo h($Items["ItemNum"]);?></span><span>個</span>
+        <button class="use" data-flag="<?php echo h($Items["ItemFlag"])?>"data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>">詳細</button>
     </li>
    <?php
     }
@@ -105,9 +106,8 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
 
   <form method="POST">
    <div id="modal-window">
-     <span id="UseItem"></span><span class="check">を使用しますか？</span>
-     <span id="UseNum" name="UseNum"></span><span class="check">個</span>
-     <input id="Name" type="hidden" name="ItemName" value="">
+
+     <input id="name" type="hidden" name="ItemName" value="">
    </div>
   </form>
  </body>
