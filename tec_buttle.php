@@ -153,6 +153,81 @@ if(isset($_POST["mainback"])){
             }
 
          }
+          /*case(1,0):
+          console.log('mons1＆item0');
+          timeSet = timeSet + monsTime;
+          break;
+
+          case(1,1):
+          console.log('mons1＆item1');
+          timeSet = timeSet + monsTime + 15;
+          break;
+
+          case(1,2):
+          console.log('mons1＆item2');
+          getGold = getGold * 1.25;
+          getExp = getExp * 1.25;
+          timeSet = timeSet + monsTime;
+          break;
+
+          case(1,3):
+          console.log('mons1＆item3');
+          getGold = getGold * 1.5;
+          timeSet = timeSet + monsTime - 15;
+          break;
+
+          case(2,0):
+          console.log('mons2＆item0');
+          getGold = getGold * goldUp;
+          getExp = getExp *expUp;
+          break;
+
+          case(2,1):
+          console.log('mons2＆item1');
+          getGold = getGold * goldUp;
+          getExp = getExp *expUp;
+          timeSet = timeSet + 15;
+          break;
+
+          case(2,2):
+          console.log('mons2＆item2');
+          getGold = getGold * (goldUp + 1.25 );
+          getExp = getExp *(expUp + 1.25);
+          break;
+
+          case(2,3):
+          console.log('mons2＆item3');
+          getGold = getGold * (goldUp + 1.5);
+          getExp = getExp *expUp;
+          timeSet = timeSet - 15;
+          break;
+
+          case(3,0):
+          console.log('mons3＆item0');
+          getGold = getGold * goldUp2;
+          timeSet = timeSet - 30;
+          break;
+
+          case(3,1):
+          console.log('mons3＆item1');
+          getGold = getGold * goldUp2;
+          timeSet = timeSet - 30 + 15;
+          break;
+
+          case(3,2):
+          console.log('mons3＆item2');
+          getGold = getGold * (goldUp2 + 1.25);
+          getExp = getExp * 1.25;
+          timeSet = timeSet - 30;
+          break;
+
+          case(3,3):
+          console.log('getGold');
+          getGold = getGold * (goldUp2 + 1.5);
+          timeSet = timeSet - 30 -45;
+          break;
+         }*/
+
 
       $(function() {
       // プログレスバーを生成

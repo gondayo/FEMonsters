@@ -1,3 +1,7 @@
+function mainback(){
+  console.log('a');
+  location.href = '/MAIN/main.php';
+}
 $(function() {
         $("#modal-main2").hide();
 });
