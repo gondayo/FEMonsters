@@ -40,16 +40,16 @@ if (isset($_POST["login"])) {
 			}
 		}
 
-		function random($length = 8){
+		/*function random($length = 8){
     	return substr(bin2hex(random_bytes($length)), 0, $length);
-		}
+		}*/
 
 		// 3. エラー処理
 		try {
 			$pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
 			$Pass = strlen($_POST['PassWord']);
 			check($Pass);
-			$stmt = $pdo->prepare('SELECT UserName,PassWord FROM user WHERE UserName = ?'); //*ではなく認証に必要な要素のみにする
+			$stmt = $pdo->prepare('SELECT UserId,UserName,PassWord FROM user WHERE UserName = ?'); //*ではなく認証に必要な要素のみにする
 			$stmt->bindvalue(1,$UserName);
 			$stmt->execute();
 
@@ -68,13 +68,14 @@ if (isset($_POST["login"])) {
 					//foreach ($stmt as $row) {
 						//$row['UserName'];  // ユーザー名
 					//}
-					$auth = random();
+					/*$auth = random();
 					$stmt = $pdo->prepare('UPDATE user SET Auth = ? WHERE UserName = ?');
 					$stmt->bindvalue(1,$auth);
 					$stmt->bindvalue(2,$UserName);
-					$stmt->execute();
+					$stmt->execute();*/
 					$_SESSION["NAME"] = $row['UserName'];
-					$_SESSION["UID"] = $auth;
+					//$_SESSION["UID"] = $auth;
+					$_SESSION["UID"] = $row['UserId'];
 					header("Location: /MAIN/main.php");  // メイン画面へ遷移
 					exit();  // 処理終了
 				} else {

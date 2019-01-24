@@ -16,7 +16,7 @@ function h($str) {
 try {
   $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
 
-    /*$Auth = $_SESSION["UID"];
+    /*$Auth = (int)(int)$_SESSION["UID"],PDO::PARAM_INT,PDO::PARAM_INT;
     $stmta = $pdo->prepare('SELECT UserId FROM user WHERE Auth = ?');
     $stmta->bindvalue(1,$Auth);
     $stmta->execute();
@@ -24,64 +24,120 @@ try {
     $sql = "SELECT * FROM item_library WHERE ShopFlag = 1";
     $si= $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC | PDO::FETCH_UNIQUE);
 
-    $stmt = $pdo->prepare('SELECT UserId,Gold FROM user WHERE Auth = ?');
-    $stmt->bindvalue(1,$_SESSION["UID"]);
+    $sql = "SELECT * FROM monster_library WHERE MShopFlag = 1";
+    $sm= $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+    //ユーザーの所持金を持ってくる
+    //$stmt = $pdo->prepare('SELECT UserId,Gold FROM user WHERE Auth = ?');
+    $stmt = $pdo->prepare('SELECT Gold FROM user WHERE UserId = ?');
+    $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
     $stmt->execute();
     $value = $stmt->fetch(PDO::FETCH_ASSOC);
-    $UserId = (int)$value["UserId"];
+    //$UserId = (int)$value["UserId"];
     $Gold = (int)$value["Gold"];
+
+    $stmt = $pdo->prepare('SELECT count(*) FROM u_monster WHERE UserId = ? AND MShopFlag = 1 AND MonsterId = 2');
+    $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
+    $stmt->execute();
+    $Monster = $stmt->fetchColumn();
+    $Monster2 = (int)$Monster;
+
+    $stmt = $pdo->prepare('SELECT count(*) FROM u_monster WHERE UserId = ? AND MShopFlag = 1 AND MonsterId = 3');
+    $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
+    $stmt->execute();
+    $Monster = $stmt->fetchColumn();
+    $Monster3 = (int)$Monster;
 
 } catch (Exception $e) {
    $errorMessage = $e->getMessage();
 }
 
-  if (isset($_POST["itembuy"])){
-    $buyname = $_POST["buyname"];
-    $total = (int)$_POST["total"];
-    $num = (int)$_POST["num"];
-
-
+  if (isset($_POST["shopbuy"])){
     try {
-      if(!empty($_POST["num"])){
+      switch ($_POST["shopbuy"]) {
 
-        if($Gold >= $total ){
+          case 1 :
+            if(!empty($_POST["num1"])){
+              $buyname = $_POST["buyname1"];
+              $total = (int)$_POST["total1"];
+              $num = (int)$_POST["num1"];
+              if($Gold >= $total ){
 
-          $Gold = $Gold - $total;
+                $Gold = $Gold - $total;
 
-          $stmt = $pdo->prepare('UPDATE user SET Gold = ? WHERE UserId = ?');
-          $stmt->bindvalue(1,(int)$Gold,PDO::PARAM_INT);
-          $stmt->bindvalue(2,(int)$UserId,PDO::PARAM_INT);
-          $stmt->execute();
+                $stmt = $pdo->prepare('UPDATE user SET Gold = ? WHERE UserId = ?');
+                $stmt->bindvalue(1,(int)$Gold,PDO::PARAM_INT);
+                $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
+                $stmt->execute();
+
+                //アイテム名とアイテムIDで指定した個数を取得
+                $stmt = $pdo->prepare('SELECT ItemNum FROM u_item WHERE ItemName = ? AND UserId = ?');
+                $stmt->bindvalue(1,$buyname);
+                $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
+                $stmt->execute();
+                $ItemNum = $stmt->fetch(PDO::FETCH_ASSOC);
+                $ItemNum["ItemNum"] += $num;
+                $stmt = $pdo->prepare('UPDATE u_item SET ItemNum = ? WHERE ItemName = ? AND UserId = ?');
+                $stmt->bindvalue(1,(int)$ItemNum["ItemNum"],PDO::PARAM_INT);
+                $stmt->bindvalue(2,$buyname);
+                $stmt->bindvalue(3,(int)$_SESSION["UID"],PDO::PARAM_INT);
+                $stmt->execute();
+
+                header("Location: buycheck.php");
+                }else{
+
+                  throw new Exception('所持金が足りません。');
+
+                }
+              }else{
+                throw new Exception('個数を選択してください。');
+              }
 
 
-          //アイテム名とアイテムIDで指定した個数を取得
-          $stmta = $pdo->prepare('SELECT ItemNum FROM u_item WHERE ItemName = ? AND UserId = ?');
-          $stmta->bindvalue(1,$buyname);
-          $stmta->bindvalue(2,(int)$UserId,PDO::PARAM_INT);
-          $stmta->execute();
-          $ItemNum = $stmta->fetch(PDO::FETCH_ASSOC);
-          $ItemNum["ItemNum"] += $num;
-          $stmtb = $pdo->prepare('UPDATE u_item SET ItemNum = ? WHERE ItemName = ? AND UserId = ?');
-          $stmtb->bindvalue(1,(int)$ItemNum["ItemNum"],PDO::PARAM_INT);
-          $stmtb->bindvalue(2,$buyname);
-          $stmtb->bindvalue(3,(int)$UserId,PDO::PARAM_INT);
-          $stmtb->execute();
+          case 2:
+            if(!empty($_POST["num2"])){
+              $buyname = $_POST["buyname2"];
+              $total = (int)$_POST["total2"];
+              $num = (int)$_POST["num2"];
+              $id = (int)$_POST["id"];
+              if($Monster2 == 0 && $id == 2 || $Monster3 == 0 && $id == 3){
+                if($Gold >= $total ){
 
-          header("Location: buycheck.php");
+                  $Gold = $Gold - $total;
 
-        }else{
+                  $stmt = $pdo->prepare('UPDATE user SET Gold = ? WHERE UserId = ?');
+                  $stmt->bindvalue(1,(int)$Gold,PDO::PARAM_INT);
+                  $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
+                  $stmt->execute();
+                  //購入したモンスターを登録
+                  $stmt = $pdo->prepare('INSERT INTO u_monster(UserId,MonsterId,MShopFlag) VALUES(?,?,1)');
+                  $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
+                  $stmt->bindvalue(2,(int)$id,PDO::PARAM_INT);
+                  $stmt->execute();
 
-          throw new Exception('所持金が足りません。');
+                  header("Location: buycheck.php");
+                }else{
 
-        }
-      }else{
-        throw new Exception('個数を選択してください。');
-      }
+                  throw new Exception('所持金が足りません。');
+                }
+                }else{
+
+                  throw new Exception('このモンスターはすでに購入済みです。');
+                }
+              }else{
+                throw new Exception('個数を選択してください。');
+              }
+              break;
+            }
+
 
 
       } catch (Exception $e) {
         $errorMessage = $e->getMessage();
       }
+
+
+
   }
   ?>
 
@@ -95,29 +151,60 @@ try {
    </head>
    <body>
      <div id="u_gold">
-     <img src="../../../PICTURE/u_gold.png" />
      <span id="gold"><?php echo h($Gold);?> G</span>
      </div>
 
-     <div id="error"><?php echo h($errorMessage); ?></div>
-     <div id="shoplist">
-     <ul>
-     <?php
-      foreach ($si as $SItems){
-        ?>
-      <li><span class="SItemName"><?php echo h($SItems["ItemName"]);?></span>
-          <span class="SItemPrice"><?php echo h($SItems["Price"]);?></span><span>G</span>
-          <button class="buy" data-name="<?php echo h($SItems["ItemName"]);?>" data-price="<?php echo h($SItems["Price"]);?>">買う</button>
-      </li>
-     <?php
-      }
-        ?>
-     </ul>
-     </div>
-    <form method="POST">
-     <div id="modal-window">
+     <div id="error"><font color="#ff0000"><?php echo h($errorMessage); ?></font></div>
+     <ul class="tab cf">
+       <li class="type tab1 tab_current">1つめ</li>
+       <li class="type tab2">2つめ</li>
+       <ul class="contents">
+       <li class="ChangeElem_Panel">
+         <div class="shoplist">
+           <ul>
+             <?php
+             $x = 0;
+             foreach ($si as $SItems){
 
-       <span id="buyname" name="buyname"></span><span class="check">を買いますか？</span>
+               ?>
+              <li id="item<?php echo h($x);?>"><span class="shopname<?php echo h($x);?>"><?php echo h($SItems["ItemName"]);?></span>
+               <span class="shopprice<?php echo h($x);?>"><?php echo h($SItems["Price"]);?></span><span class ="buyg<?php echo h($x);?>">G</span>
+               <button class="buy0" data-name="<?php echo h($SItems["ItemName"]);?>" data-price="<?php echo h($SItems["Price"]);?>">買う</button>
+              </li>
+              <br>
+              <?php
+              $x++;
+            }
+            ?>
+          </ul>
+        </div>
+   </li>
+   <li class="ChangeElem_Panel">
+     <div class="shoplist">
+              <ul>
+                <?php
+                $x = 0;
+                foreach ($sm as $SMonsters){
+
+                  ?>
+                 <li id="monster<?php echo h($x);?>"><span class="shopname<?php echo h($x);?>"><?php echo h($SMonsters["MonsterName"]);?></span>
+                  <span class="shopprice<?php echo h($x);?>"><?php echo h($SMonsters["MPrice"]);?></span><span class ="buyg<?php echo h($x);?>">G</span>
+                  <button class="buy1" data-id ="<?php echo h($SMonsters["MonsterId"]);?>" data-name="<?php echo h($SMonsters["MonsterName"]);?>" data-price="<?php echo h($SMonsters["MPrice"]);?>">買う</button>
+                 </li>
+                 <br>
+                 <?php
+                 $x++;
+               }
+
+               ?>
+             </ul>
+           </div>
+         </li>
+  </ul>
+    <form method="POST">
+     <div class="modal-window1">
+       <h1>購入確認</h1>
+       <span class="buyname" name="buyname"></span><span class="check">を買いますか？</span>
        <select name="num">
          <option value="">選択してください</option>
          <option value="1">1</option>
@@ -131,13 +218,32 @@ try {
          <option value="9">9</option>
        </select>
        <span class="ko">個</span>
-       <span id ="total"></span><span>Gold</span>
-       <button type="submit" id="itembuy" name="itembuy">買う</button>
+       <span class="total"></span><span>Gold</span>
+       <button type="submit" class="shopbuy" name="shopbuy" value="1">買う</button>
 
-       <p class="iteminfo"></p>
-       <input id="info1" type="hidden" name="buyname" value="">
-       <input id="info2" type="hidden" name="total" value="">
-       <input id="info3" type="hidden" name="num" value="">
+       <p class="info"></p>
+       <input class="info1" type="hidden" name="buyname1" value="">
+       <input class="info2" type="hidden" name="total1" value="">
+       <input class="info3" type="hidden" name="num1" value="">
+     </div>
+   </form>
+   <form method="POST">
+     <div class="modal-window2">
+       <h1>購入確認</h1>
+       <span class="buyname" name="buyname"></span><span class="check">を買いますか？</span>
+       <select name="num">
+         <option value="">選択してください</option>
+         <option value="1">1</option>
+       </select>
+       <span class="ko">個</span>
+       <span class="total"></span><span>Gold</span>
+       <button type="submit" class="shopbuy" name="shopbuy" value="2">買う</button>
+
+       <p class="info"></p>
+       <input class="info4" type="hidden" name="buyname2" value="">
+       <input class="info5" type="hidden" name="total2" value="">
+       <input class="info6" type="hidden" name="num2" value="">
+       <input class="info7" type="hidden" name="id" value="">
      </div>
     </form>
    </body>

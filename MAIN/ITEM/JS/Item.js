@@ -31,12 +31,14 @@ $(function(){
 
 
    if(ItemFlag == 1){
-     $("#modal-window").append('<span id="useitem"></span><span class="check">を使用しますか？</span><br>');
-     $("#modal-window").append('<span id="usenum" name="usenum"></span><span class="k">個</span>');
+     $("#modal-window").append('<h1>使用確認</h1>');
+     $("#modal-window").append('<span id="useitem"></span><span class="check">を使用しますか？</span>');
+     $("#modal-window").append('<span id="usenum" name="usenum"></span><span class="k">個</span><br>');
      $("#modal-window").append('<button type="submit" id="ok" name="ok">使う</button><br>');
      $("#modal-window").append('<p id="description">アイテム説明</p>')
    } else {
-     $("#modal-window").append('<span id="useitem"></span><br>');
+     $("#modal-window").append('<h1>使用確認</h1>');
+     $("#modal-window").append('<span id="useitem"></span>');
      $("#modal-window").append('<span id="usenum" name="usenum"></span><span class="k">個</span><br>');
      $("#modal-window").append('<p id="description">アイテム説明</p>')
    }
@@ -53,8 +55,8 @@ $(function(){
     //モーダルウィンドウを表示
         $("#modal-background,#modal-window").fadeIn("slow");
 
-    //画面のどこかをクリックしたらモーダルを閉じる
-      $("#modal-background,#modal-window").click(function(){
+    //画面外のどこかとボタンをクリックしたらモーダルを閉じる
+      $("#modal-background,#ok").click(function(){
           $("#modal-window,#modal-background").fadeOut("slow",function(){
          //挿入した<div id="modal-bg"></div>を削除
               $("#modal-background").remove() ;
@@ -65,6 +67,7 @@ $(function(){
               $("#description").remove();
               $("#ok").remove();
               $("br").remove();
+              $("h1").remove();
          });
 
         });
@@ -87,4 +90,21 @@ $(function(){
      }
 
    });
+
+   $(function() {
+     $('.ChangeElem_Panel').hide();
+     $('.ChangeElem_Panel').eq(0).show();
+     // クリックしたときの関数
+     $('.type').click(function() {
+      var index = $('.type').index(this);
+      $('.ChangeElem_Panel').hide();
+      $('.ChangeElem_Panel').eq(index).show();
+      // 〜〜タブについての処理〜〜
+      // 一度タブについている'tab_current'を消し
+      $('.tab li').removeClass('tab_current');
+      //クリックされたタブのみに'tab_current'をつける。
+      $(this).addClass('tab_current')
+    });
+  });
+
 });
