@@ -54,7 +54,9 @@ try {
   </div>
 <div class="header" id="contents">
 <tr>
-  <a href="Logout.php">FEmonsters</a>
+  <a href="Logout.php">
+    <img src="/PICTURE/shortlogo.png" alt="">
+  </a>
   <p id="modal-open" style="display:inline;">Manual</p>
 </tr>
 </div>
@@ -62,13 +64,13 @@ try {
 <div class="users">
 
   <?php var_dump($User["UserName"], ENT_QUOTES, 'UTF-8')?>
-
   <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?> </a>
 
 </div>
+<div class="window">
   <div class="left">
     <div class="game">
-      <object type="text/html" data="/MAIN/MAP/HTML/Map.html"></object>
+      <object type="text/html" id = "map" data="/MAIN/MAP/HTML/Map.html"></object>
     </div>
   </div>
   <div class="right">
@@ -80,18 +82,25 @@ try {
         <object type="text/html" data="/MAIN/SHOP/SHOPBUY/shopbuy.php" height="525px" width="100%"></object>
       </div>
       <div id="tabpage3">
-        <object type="text/html" data="/MAIN/MONSTER/PHP/monsterlist.php" height="525px" width="100%"></object>
+        <object type="text/html" data="/MAIN/MONSTER/PHP/training.php" height="525px" width="100%"></object>
       </div>
       <div id="tabpage4">…… タブ4の中身 ……</div>
     </div>
     <div id="cmbotton">
-      <a href="#tabpage1"id=item>アイテム</a>
-      <a href="#tabpage2"id=shop>ショップ</a>
-      <a href="#tabpage3"id=monster>モンスター</a>
+      <a href="#tabpage1"id=item>
+        <img src="/PICTURE/itembutton.png" alt="ITEM">
+      </a>
+      <a href="#tabpage2"id=shop>
+        <img src="/PICTURE/shopbutton.png" alt="SHOP">
+      </a>
+      <a href="#tabpage3"id=monster>
+        <img src="/PICTURE/monsterbutton.png" alt="MONS">
+      </a>
       <a href="#tabpage4"id=info>info</a>
   </div>
   </div>
 
+</div>
   <script type="text/javascript">
 
      var tabs = document.getElementById('cmbotton').getElementsByTagName('a');
@@ -130,6 +139,7 @@ try {
      tabs[0].onclick();
 
   </script>
+
 </body>
 
 </html>

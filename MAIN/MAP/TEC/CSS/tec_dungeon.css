@@ -1,17 +1,7 @@
-.tec_list {
-  position: relative;
-  vertical-align: middle;
-  border: solid 1px;
-  height: 100px;
-  width: 90%;
-}
-
-.tec_name_a {
+#tec_name_a {
   position: absolute;
-  display: block;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  text-align: left;
+  left: 60px;
+}
+body{
+  position: relative;
 }

@@ -42,12 +42,15 @@
   float: right;
   height: 525px;
 	width: 500px;
+  background-color: #BAE568;
+
 }
 #cmbotton{
    position: relative;
    float: right;
    width: 500px;
    height: auto;
+   background-color: #cccccc
 }
 #help{
   position: relative;
@@ -56,34 +59,33 @@
 #item{
    position: relative;
    float: left;
-   top: 10px;
-   left: 0px;
-   width: 160x;
-   height: 50px;
+   left: 30px;
+   width: 90px;
+   height: 90px;
+   background-color: #828282
 }
 #shop{
    position: relative;
    float: left;
-   top: 10px;
-   left: 10px;
-   width: 160px;
-   height: 50px;
+   left: 60px;
+   width: 90px;
+   height: 90px;
+   background-color: #828282
 }
 #monster{
    position: relative;
    float: left;
-   top: 10px;
-   left: 10px;
-   width: 160px;
-   height: 50px;
+   left: 90px;
+   width: 90px;
+   height: 90px;
+   background-color: #828282
 }
 #info{
-   display:none;
    position: relative;
    float: left;
-   left: 80px;
-   width: 100px;
-   height: 50px;
+   left: 120px;
+   width: 90px;
+   height: 90px;
    background-color: #828282
 }
 
@@ -95,8 +97,6 @@
 
 #modal-open {
   color: #cc0000;
-  float: right;
-  top: 0px;
 }
 /* モーダル コンテンツエリア */
 #modal-main {
@@ -134,6 +134,9 @@
   width:  100%;
 }
 body {
-  margin: 0;
-  background-image: url("/TOP/PICTURE/background.png");
+   border-width: 0px;
+   padding: 0px;
+   margin: 0px;
+   font-size: 90%;
+   background-image: url("/TOP/PICTURE/background.png");
 }
