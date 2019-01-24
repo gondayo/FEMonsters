@@ -84,6 +84,8 @@ try {
 
       let uans = $(this).attr("value");
       if(uans == ans){
+        $("#answer").text("");
+
         $("#judge").text("正解！");
         x++;
         y++;
@@ -102,7 +104,6 @@ try {
 
     });
     $("#next").on('click',function(){
-      $("#answer").text("");
 
       //問題表示
       let title = question_jq[array_key_jq[x]].Tec_QuestionText;
