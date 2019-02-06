@@ -14,7 +14,6 @@ function h($str) {
 }
 
 try {
-
   $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
   $stmt = $pdo->prepare('SELECT * FROM u_monster LEFT OUTER JOIN monster_library ON u_monster.MonsterId = monster_library.MonsterId WHERE UserId = ? ORDER BY u_monster.MonsterId ASC');
   $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
@@ -54,6 +53,9 @@ try {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="../JS/training.js"></script>
   <title>Training</title>
+  <script type="text/javascript">
+  let mons_list = <?php echo $array_mons_list; ?>;
+  </script>
 </head>
 <body>
   <div class="relative">

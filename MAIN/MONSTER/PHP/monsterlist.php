@@ -27,11 +27,9 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
 ?>
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+  <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
+  </head>
 <link rel="stylesheet" type="text/css" href="/MAIN/MONSTER/CSS/monsterlist.css">
 <body>
 
@@ -50,5 +48,5 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
   ?>
   </ul>
 
-</body>
+    </body>
 </html>
