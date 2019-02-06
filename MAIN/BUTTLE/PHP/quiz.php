@@ -225,6 +225,8 @@ $(function() {
       gold = gold + getGold;
       exp = exp + getExp;
 
+      console.log(gold);
+
       $("#answer").text("");
 
 
