@@ -231,7 +231,7 @@ $(function() {
 
 
 
-      if(x == 3){
+      if(x == 10){
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
@@ -247,7 +247,7 @@ $(function() {
 
       $("#result").val(y);
 
-      if(x == 3){
+      if(x == 10){
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
@@ -256,7 +256,7 @@ $(function() {
       }
 
     }
-    if(x == 3){
+    if(x == 10){
 
       z =  r - y;
       hp -= z;
