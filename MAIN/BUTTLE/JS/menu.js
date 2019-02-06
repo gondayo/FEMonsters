@@ -80,6 +80,8 @@ $(function(){
 $(function(){
 
   $(document).on("click", "#yesClick",function() {
+    var gold = 0;
+    var exp = 0;
     location.href = '/MAIN/main.php';
   });
 });
