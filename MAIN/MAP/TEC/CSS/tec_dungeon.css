@@ -1,7 +1,19 @@
-#tec_name_a {
-  position: absolute;
-  left: 60px;
+.tec_list{
+  width: 70%;
+}
+ul{
+  padding: 100px;
+  margin: 0;
+  width: 100%;
+}
+li{
+  padding: 0;
+  margin: 0;
+  list-style-type:none;
+  float: left;
+  width: 50%;
 }
 body{
+  touch-action: none;
   position: relative;
 }
