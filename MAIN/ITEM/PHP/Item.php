@@ -99,8 +99,8 @@ try {
 <div id="error"><font color="#ff0000"><?php echo h($errorMessage); ?></font></div>
 
   <ul class="tab cf">
-    <li class="type tab1 tab_current">1つめ</li>
-    <li class="type tab2">2つめ</li>
+    <li class="type tab1 tab_current">スキルアイテム</li>
+    <li class="type tab2">進化アイテム</li>
     <ul class="contents">
     <li class="ChangeElem_Panel">
       <div class="itemlist">
@@ -111,7 +111,7 @@ try {
             ?>
             <li id="list<?php echo h($x);?>"><span class="itemname<?php echo h($x);?>"><?php echo h($Items["ItemName"]);?></span>
               <span class="itemnum<?php echo h($x);?>"><?php echo h($Items["ItemNum"]);?></span><span class ="k<?php echo h($x);?>">個</span>
-              <button class="use" data-flag="<?php echo h($Items["ItemFlag"])?>"data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>"></button>
+              <button class="use" data-flag="<?php echo h($Items["ItemFlag"]);?>"data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>"></button>
             </li>
           <?php
             $x++;

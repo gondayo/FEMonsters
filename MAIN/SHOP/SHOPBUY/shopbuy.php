@@ -156,8 +156,8 @@ try {
 
      <div id="error"><font color="#ff0000"><?php echo h($errorMessage); ?></font></div>
      <ul class="tab cf">
-       <li class="type tab1 tab_current">1つめ</li>
-       <li class="type tab2">2つめ</li>
+       <li class="type tab1 tab_current">アイテムショップ</li>
+       <li class="type tab2">モンスターショップ</li>
        <ul class="contents">
        <li class="ChangeElem_Panel">
          <div class="shoplist">
@@ -165,7 +165,6 @@ try {
              <?php
              $x = 0;
              foreach ($si as $SItems){
-
                ?>
               <li id="item<?php echo h($x);?>"><span class="shopname<?php echo h($x);?>"><?php echo h($SItems["ItemName"]);?></span>
                <span class="shopprice<?php echo h($x);?>"><?php echo h($SItems["Price"]);?></span><span class ="buyg<?php echo h($x);?>">G</span>
@@ -205,7 +204,7 @@ try {
      <div class="modal-window1">
        <h1>購入確認</h1>
        <span class="buyname" name="buyname"></span><span class="check">を買いますか？</span>
-       <select name="num">
+       <select class="num" name="num">
          <option value="">選択してください</option>
          <option value="1">1</option>
          <option value="2">2</option>
@@ -217,8 +216,8 @@ try {
          <option value="8">8</option>
          <option value="9">9</option>
        </select>
-       <span class="ko">個</span>
-       <span class="total"></span><span>Gold</span>
+       <span class="ko">個</span><br>
+       <span class="total"></span><span class="gold">Gold</span>
        <button type="submit" class="shopbuy" name="shopbuy" value="1">買う</button>
 
        <p class="info"></p>
@@ -231,12 +230,12 @@ try {
      <div class="modal-window2">
        <h1>購入確認</h1>
        <span class="buyname" name="buyname"></span><span class="check">を買いますか？</span>
-       <select name="num">
+       <select class="num" name="num">
          <option value="">選択してください</option>
          <option value="1">1</option>
        </select>
-       <span class="ko">個</span>
-       <span class="total"></span><span>Gold</span>
+       <span class="ko">個</span><br>
+       <span class="total"></span><span class="gold">Gold</span>
        <button type="submit" class="shopbuy" name="shopbuy" value="2">買う</button>
 
        <p class="info"></p>

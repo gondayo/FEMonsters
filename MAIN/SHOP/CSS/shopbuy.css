@@ -265,9 +265,10 @@ ul {
   overflow : hidden;
   margin: 0;
   padding: 0;
-  position: relative;
+  position: absolute;
   top: 37.1%;
   height: 330px;
+  width: 100%
 }
 
 .tab1, .tab2 {
@@ -291,10 +292,43 @@ ul {
 
 .buyname {
   position: absolute;
-  left: 30%;
+  left: 20%;
+  text-align: left;
 }
 
 .check {
   position: absolute;
   left: 40%;
+}
+
+.num {
+  position: absolute;
+  left: 60%;
+}
+
+.ko {
+  position: absolute;
+  left: 87%;
+}
+
+.total {
+  position: absolute;
+  width: 200px;
+  left: 18%;
+  top: 40%;
+  font-size: 1.5em;
+  text-align: right;
+  color: #0000ff;
+}
+
+.gold {
+  position: absolute;
+  top: 43%;
+  left: 60%;
+}
+
+.shopbuy {
+  top: 42%;
+  position: absolute;
+  left: 70%;
 }

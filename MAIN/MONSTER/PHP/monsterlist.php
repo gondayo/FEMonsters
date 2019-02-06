@@ -9,18 +9,17 @@ define('DB_PASSWORD','g015c1316');
 // エラーメッセージの初期化
 $errorMessage = "";
 
+function h($str) {
+    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+}
+
 // モンスター情報をすべて表示する
 try {
 $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-  $UserName = $_SESSION["NAME"];
-  $stmta = $pdo->prepare('SELECT UserId FROM user WHERE UserName = ?');
-  $stmta->bindvalue(1,$UserName);
-  $stmta->execute();
-  $UserId = $stmta->fetch(PDO::FETCH_ASSOC);
+
   $stmt = $pdo->prepare('SELECT * FROM u_monster INNER JOIN monster_library ON u_monster.MonsterId = monster_library.MonsterId WHERE UserId = ? ORDER BY MonsterId ASC');
-  $stmt->bindvalue(1,(int)$UserId["UserId"],PDO::PARAM_INT);
+  $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
   $stmt->execute();
-  $Monsters=$stmt->fetch(PDO::FETCH_ASSOC);
 
   } catch (Exception $e) {
     $errorMessage = $e->getMessage();
@@ -37,13 +36,18 @@ $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMO
 <body>
 
   <?php var_dump($Monsters["MonsterName"])?>
-  <ul>
+<ul>
 
+  <?php
+    foreach ($stmt as $Monsters){
+      ?>
      <li>
-       <img src="<?php echo htmlspecialchars($Monsters["MonsterPic"], ENT_QUOTES, 'UTF-8');?>" alt="モンスター画像">
-       <span><?php echo htmlspecialchars($Monsters["MonsterName"], ENT_QUOTES, 'UTF-8');?></span>
+       <img src="<?php echo h($Monsters["MonsterPic"]);?>" alt="モンスター画像">
+       <span><?php echo h($Monsters["MonsterName"]);?></span>
      </li>
-
+  <?php
+    }
+  ?>
   </ul>
 
 </body>

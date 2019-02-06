@@ -1,16 +1,7 @@
 @charset "utf-8";
 
-#contents {
-  z-index: 0;
-  font-size: 16px;
-}
-
-
-.choices {
-  color: #cc0000;
-}
 /* モーダル コンテンツエリア */
-#quiz-modal {
+#modal-main {
     display: none;
     width: 100%;
     height: 300px;
@@ -19,9 +10,9 @@
     background-color: #ffffff;
     color: #666666;
     position: fixed;
-    z-index: 2;
+    z-index: 4;
 }
-#quiz-modal h1 {
+#modal-main h1 {
     background: #ededed;
     padding: 20px;
     border-radius: 5px 5px 0 0;
@@ -30,7 +21,7 @@
     text-align: center;
 }
 /* モーダル 背景エリア */
-#quiz-modalbg {
+#modal-bg {
     display:none;
     width:100%;
     height:100%;
@@ -38,13 +29,39 @@
     position:fixed;
     top:0;
     left:0;
-    z-index: 1;
-}
-html {
-    height:525px;
+    z-index: 3;
 }
 
 body {
-    width:100%;
-    height:100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.relative {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+
+#monscheck {
+  position: absolute;
+
+}
+.levelup {
+    position: absolute;
+    top: 60px;
+}
+
+.evolution {
+    position: absolute;
+    top: 90px;
+}
+
+#currentmonster {
+  position: absolute;
+  top : 0%;
+  left: 20%;
+}
+#modal-open {
+  color: #cc0000;
 }

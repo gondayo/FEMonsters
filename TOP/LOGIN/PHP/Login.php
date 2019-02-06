@@ -76,6 +76,7 @@ if (isset($_POST["login"])) {
 					$_SESSION["NAME"] = $row['UserName'];
 					//$_SESSION["UID"] = $auth;
 					$_SESSION["UID"] = $row['UserId'];
+					$_SESSION["currentmonster"] = 1;
 					header("Location: /MAIN/main.php");  // メイン画面へ遷移
 					exit();  // 処理終了
 				} else {

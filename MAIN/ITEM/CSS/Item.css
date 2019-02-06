@@ -232,9 +232,10 @@ ul {
   overflow : hidden;
   margin: 0;
   padding: 0;
-  position: relative;
+  position: absolute;
   top: 37.1%;
   height: 330px;
+  width: 100%
 }
 
 .tab1, .tab2 {
@@ -260,6 +261,7 @@ ul {
 #useitem {
   position: absolute;
   left: 30%;
+  text-align: left;
 
 }
 

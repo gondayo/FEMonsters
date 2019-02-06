@@ -7,14 +7,14 @@
  <html>
    <head>
      <meta charset="UTF-8">
-     <link href="/MAIN/SHOP/CSS/buycheck.css" rel="stylesheet">
+     <link href="/MAIN/ITEM/CSS/Itemcheck.css" rel="stylesheet">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    </head>
    <body>
     <div id="sikaku">
-     <span id="buse">購入しました</span>
+     <span id="cuse">使用しました</span>
      <ul>
-       <li><a id="back" href="shopbuy.php">戻る</a></li>
+       <li><a id="back" href="training.php">戻る</a></li>
      </ul>
     </div>
    </body>

@@ -42,25 +42,123 @@ if(isset($_POST["mainback"])){
 <html>
 <head>
 <meta charset="utf-8">
+<!-- Bootstrap core CSS-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <link href="../CSS/quiz.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<!--<script src="../JS/prog.js"></script>-->
 <script src="../JS/tec_quiz.js"></script>
+
+
+<script type="text/javascript">
+
+
+$(function() {
+$.fn.timer = function(totalTime) {
+// 既に起動済のものがある場合は削除しておく
+clearTimeout(this.data('id_of_settimeout'));
+this.empty();
+
+// ターゲット内に要素を作成
+this.append('<h4><span></span> seconds left.</h4>');
+this.append('<div class="progress"></div>');
+this.children('.progress').append('<div class="progress-bar progress-bar-info"></div>');
+this.find('.progress-bar').css({
+cssText: '-webkit-transition: none !important; transition: none !important;',
+width: '100%'
+});
+
+var countdown = (function(timeLeft) {
+var $progressBar = this.find('div.progress-bar');
+var $header = this.children('h4');
+
+if (timeLeft <= 0) {
+$header.empty().text('Over the time limit!').addClass('text-danger');
+$("#judge").text("不正解・・・");
+$("#answer").text("正解は"+ ans + "です。");
+x++;
+r++;
+
+
+$("#result").val(y);
+
+//body内の最後に<div id="modal-bg"></div>を挿入
+$("body").append('<div id="quiz-modalbg"></div>');
+
+//画面中央を計算する関数を実行
+modalResize();
+
+//モーダルウィンドウを表示
+$("#quiz-modalbg,#quiz-modal").fadeIn("slow");
+//画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+
+//ボタンをクリックしたらモーダルを閉じる
+ $("#next,#result").click(function(){
+       $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
+    //挿入した<div id="modal-bg"></div>を削除
+       $('#quiz-modalbg').remove();
+});
+});
+
+$(window).resize(modalResize);
+function modalResize(){
+
+      var w = $(window).width();
+    var h = $(window).height();
+
+      var cw = $("#modal-main").outerWidth();
+     var ch = $("#modal-main").outerHeight();
+
+  //取得した値をcssに追加する
+      $("#modal-main").css({
+          "left": ((w - cw)/2) + "px",
+          "top": ((h - ch)/2) + "px"
+    });
+
+}
+
+             z =  r - y;
+             hp -= z;
+             $("#hit").text(hp);
+
+}
+$header.children('span').text(timeLeft);
+
+var width = (timeLeft - 1) * (100/totalTime); // unit in '%'
+if (width < 20) { // less than 20 %
+$progressBar.removeClass();
+$progressBar.addClass('progress-bar progress-bar-danger');
+} else if (width < 50) { // less than 50 % (and more than 20 %)
+$progressBar.removeClass();
+$progressBar.addClass('progress-bar progress-bar-warning');
+}
+
+$progressBar.animate({
+width:  width + '%'
+}, 1000, 'linear');
+
+var id = setTimeout((function() {
+countdown(timeLeft - 1);
+}), 1000);
+this.data("id_of_settimeout", id);
+}).bind(this);
+
+countdown(totalTime);
+};
+});
+jQuery(function($) {
+$('#hoge').timer(45);
+});
+</script>
+
 <title>戦闘</title>
 <link rel="stylesheet" href="../CSS/buttle.css">
-<link type="text/css" rel="stylesheet"
-  href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" />
 
-<style type="text/css">
-
-  #loading {
-    position: absolute;
-    left: 50%;
-  }
-</style>
-<script type="text/javascript"
-  src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript"
-  src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 <script src="../JS/menu.js"></script>
 <script type="text/javascript">
 
@@ -104,7 +202,7 @@ for (let i = choices.length - 1; i >= 0; i--){
 
 $(function() {
 
-  timeAct();
+
 
   $("h2").text(title);
   $("#choices1").val(choices[0]);
@@ -114,7 +212,7 @@ $(function() {
 
   $(".choice").on('click',function() {
 
-    $( "#progress" ).progressbar( "destroy" );
+    //$( "#progress" ).progressbar( "destroy" );
 
     var uans = $(this).attr("value");
     if(uans == ans){
@@ -128,13 +226,14 @@ $(function() {
       exp = exp + getExp;
 
       $("#answer").text("");
-      $("#result").remove();
-      $("#result").val(y);
+
+
 
       if(x == 3){
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
+        $("#result").val(y);
       }
 
     } else {
@@ -143,14 +242,14 @@ $(function() {
       x++;
       r++;
 
-      $("#result").remove();
+
       $("#result").val(y);
 
       if(x == 3){
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
-
+        $("#result").val(y);
 
       }
 
@@ -187,7 +286,7 @@ $(function() {
           });
 
      }
-   }else if( r == 1){
+   }else if(r == 1){
       z =  r - y;
       hp -= z;
       $("#hit").text(hp);
@@ -209,8 +308,12 @@ $(function() {
   });
   $("#next").on('click',function(){
 
-    timeAct();
+    //timeAct();
     popquestion();
+
+    $('#hoge').timer(45);
+
+
 
   });
 
@@ -238,9 +341,10 @@ $(function() {
   <form id = "mainbackform" method = "POST"><button type = "submit" name = "mainback" value = "b">MAPへ戻る</button></form>
 </div>
 <input type="image" id="modal-open" src="../../../PICTURE/stop.png" name="メニュー" value="メニュー">
+<div id="hoge">
 
-<div id="progress"></div>
-  <div id="loading"></div>
+</div>
+
 
   <p>HP:<span id= "hit"></span></p>
   <p>問題数:<span id= "no"></span></p>

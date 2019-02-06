@@ -61,11 +61,15 @@ $(function(){
                    "top": ((h - ch)/2) + "px"
              });
         }
+        
         //画面外のどこかとボタンをクリックしたらモーダルを閉じる
           $("#modal-background,.shopbuy").click(function(){
               $(".modal-window1,#modal-background").fadeOut("slow",function(){
              //挿入した<div id="modal-bg"></div>を削除
                   $("#modal-background").remove() ;
+                  // 未選択状態にする
+
+                  selectedIndex = -1;
               });
 
           });
