@@ -239,11 +239,13 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       gold = gold + getGold;
       exp = exp + getExp;
 
+      console.log(gold);
+
       $("#answer").text("");
 
 
 
-      if(x == 3){
+      if(x == 10){
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
@@ -259,7 +261,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
 
       $("#result").val(y);
 
-      if(x == 3){
+      if(x == 10){
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
@@ -268,7 +270,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       }
 
     }
-    if(x == 3){
+    if(x == 10){
 
       z =  r - y;
       hp -= z;
