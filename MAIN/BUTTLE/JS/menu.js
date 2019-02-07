@@ -75,24 +75,3 @@ $(function(){
      }
    });
 });
-<<<<<<< HEAD
-=======
-
-
-$(function(){
-
-  $(document).on("click", "#yesClick",function() {
-    var gold = 0;
-    var exp = 0;
-    location.href = '/MAIN/main.php';
-  });
-});
-
-$(function(){
-  $(document).on("click","#noClick", function() {
-
-    $("#modal-bg,#modal-main3").remove();
-
-  });
-});
->>>>>>> 4d6de380f66a79d740dbf4ae44a80f488760fdcf
