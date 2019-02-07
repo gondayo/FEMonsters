@@ -55,18 +55,13 @@ try {
 <div class="header" id="contents">
 <tr>
   <a href="Logout.php">
-    <img src="/PICTURE/shortlogo.png" alt="">
+    <img src="/PICTURE/shortlogo.png" alt="FEMonstars">
   </a>
-  <p id="modal-open" style="display:inline;">Manual</p>
+  <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo($User["UserName"]);?> </a>
+  <div id="modal-open" style="display:inline;">Manual</div>
 </tr>
 </div>
 </header>
-<div class="users">
-
-  <?php var_dump($User["UserName"], ENT_QUOTES, 'UTF-8')?>
-  <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo htmlspecialchars($User["UserName"], ENT_QUOTES, 'UTF-8');?> </a>
-
-</div>
 <div class="window">
   <div class="left">
     <div class="game">

@@ -32,8 +32,8 @@ try {
 }
 
 //モータルウィンドウ用画面遷移　
-if(isset($_POST["mainback"])){
-  header("Location: /MAIN/main.php");
+if(isset($_POST["yesClick"])) {
+  header("Location: retire.php");
   exit();
 }
 
@@ -77,14 +77,14 @@ var countdown = (function(timeLeft) {
 var $progressBar = this.find('div.progress-bar');
 var $header = this.children('h4');
 
-if (timeLeft <= 0) {
+if (timeLeft == 0) {
 $header.empty().text('Over the time limit!').addClass('text-danger');
+clearTimeout(this.data('id_of_settimeout'));
+this.empty();
 $("#judge").text("不正解・・・");
 $("#answer").text("正解は"+ ans + "です。");
 x++;
 r++;
-
-
 $("#result").val(y);
 
 //body内の最後に<div id="modal-bg"></div>を挿入
@@ -99,6 +99,7 @@ $("#quiz-modalbg,#quiz-modal").fadeIn("slow");
 
 //ボタンをクリックしたらモーダルを閉じる
  $("#next,#result").click(function(){
+
        $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
     //挿入した<div id="modal-bg"></div>を削除
        $('#quiz-modalbg').remove();
@@ -125,6 +126,16 @@ function modalResize(){
              z =  r - y;
              hp -= z;
              $("#hit").text(hp);
+             if(hp<1){
+
+               modalopen();
+
+             }else{
+
+               popquestion();
+
+             }
+             return;
 
 }
 $header.children('span').text(timeLeft);
@@ -174,8 +185,7 @@ var y = 0;
 var r = 0;
 //HP
 var hp = 2;
-  $("#hit").text(hp);
-  $("#no").text(x);
+
 //不正解数
 var z = 0;
 
@@ -202,8 +212,9 @@ for (let i = choices.length - 1; i >= 0; i--){
 
 $(function() {
 
-
-
+  $("#hit").text(hp);
+  $("#no").text(x);
+  $("#t").text(ans);
   $("h2").text(title);
   $("#choices1").val(choices[0]);
   $("#choices2").val(choices[1]);
@@ -211,10 +222,13 @@ $(function() {
   $("#choices4").val(choices[3]);
 
   $(".choice").on('click',function() {
+clearTimeout($("#hoge").data('id_of_settimeout'));
+    $("#hoge").empty();
 
     //$( "#progress" ).progressbar( "destroy" );
 
     var uans = $(this).attr("value");
+    console.log(uans);
     if(uans == ans){
 
       $("#judge").text("正解！");
@@ -295,10 +309,6 @@ $(function() {
 
         modalopen();
 
-      }else{
-
-        popquestion();
-
       }
 
     y = 0;
@@ -307,11 +317,11 @@ $(function() {
 
   });
   $("#next").on('click',function(){
+    $("#no").text(x);
+      popquestion();
+$('#hoge').timer(45);
 
-    //timeAct();
-    popquestion();
 
-    $('#hoge').timer(45);
 
 
 
@@ -338,7 +348,7 @@ $(function() {
 
 <div id="modal-main">
   <h1>Result</h1>
-  <form id = "mainbackform" method = "POST"><button type = "submit" name = "mainback" value = "b">MAPへ戻る</button></form>
+  <form method = "POST"><button type = "submit" name = "yesClick" value = "b">MAPへ戻る</button></form>
 </div>
 <input type="image" id="modal-open" src="../../../PICTURE/stop.png" name="メニュー" value="メニュー">
 <div id="hoge">
@@ -357,6 +367,7 @@ $(function() {
    <input type = "button" id = "choices3" class="choice" name="choices3" value="">
    <input type = "button" id = "choices4" class="choice" name="choices4" value="">
    <input type = "hidden" name = "answer" value = "">
+  
  <div id="quiz-modal">
    <span id = "judge"></span>
    <span id = "answer"></span>

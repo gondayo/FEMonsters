@@ -8,41 +8,37 @@
 </head>
 <link rel="stylesheet" type="text/css" href="/MAIN/MAP/TEC/CSS/tec_dungeon.css">
 <body>
+<ul id="list" style="list-style:none;">
+    <li>
+      <input type="image" class="tec_list" src="/PICTURE/questlist.png"onclick="location.href='/MAIN/BUTTLE/PHP/quiz.php'"alt="クエスト">
+      <br>
+    </li>
 
-    <div class="tec_list">
-      <a href="game.html">
-        <img id="tec_name_a" src="/PICTURE/questlist.png" alt="クエスト">
-      </a>
-    </div><br>
+    <li>
+      <input type="image" class="tec_list" src="/PICTURE/questlist2.png"alt="クエスト">
+      <br>
+    </li>
 
-    <div class="tec_list">
-      <a href="game.html" >
-        <img id="tec_name_a" src="/PICTURE/questlist.png" alt="クエスト">
-      </a>
-    </div><br>
+    <li>
+      <input type="image" class="tec_list" src="/PICTURE/questlist3.png"alt="クエスト">
+      <br>
+    </li>
 
-    <div class="tec_list">
-      <a href="game.html" >
-        <img id="tec_name_a" src="/PICTURE/questlist.png" alt="クエスト">
-      </a>
-    </div><br>
+    <li>
+      <input type="image" class="tec_list" src="/PICTURE/questlist4.png"alt="クエスト">
+      <br>
+    </li>
 
-    <div class="tec_list">
-      <a href="game.html" >
-        ボタン
-      </a>
-    </div><br>
+    <li>
+      <input type="image" class="tec_list" src="/PICTURE/questlist5.png"alt="クエスト">
+      <br>
+    </li>
 
-    <div class="tec_list">
-      <a href="game.html" >
-        ボタン
-      </a>
-    </div><br>
+    <li>
+      <input type="image" class="tec_list" src="/PICTURE/questlist6.png"alt="クエスト">
+      <br>
+    </li>
 
-    <div class="tec_list">
-      <a href="game.html" >
-        ボタン
-      </a>
-    </div><br>
+</ul>
 </body>
 </html>

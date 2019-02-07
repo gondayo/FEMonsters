@@ -101,6 +101,7 @@ if (isset($_POST["login"])) {
 <!doctype html>
 <html>
 	<head>
+		<link href="../CSS/Login.css" rel="stylesheet">
 			<meta charset="UTF-8">
 			<title>ログイン</title>
 	</head>

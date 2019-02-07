@@ -14,7 +14,7 @@ function popquestion(){
             [choices[i], choices[rand]] = [choices[rand], choices[i]]
 
           }
-
+          $("#t").text(ans);
           $("h2").text(title);
           $("#choices1").val(choices[0]);
           $("#choices2").val(choices[1]);
@@ -42,16 +42,15 @@ $(function(){
   var $progressBar = this.find('div.progress-bar');
   var $header = this.children('h4');
 
-  if (timeLeft <= 0) {
+  if (timeLeft == 0) {
   $header.empty().text('Over the time limit!').addClass('text-danger');
+  clearTimeout(this.data('id_of_settimeout'));
+  this.empty();
   $("#judge").text("不正解・・・");
   $("#answer").text("正解は"+ ans + "です。");
   x++;
   r++;
-
-
   $("#result").val(y);
-
   //body内の最後に<div id="modal-bg"></div>を挿入
   $("body").append('<div id="quiz-modalbg"></div>');
 
@@ -64,6 +63,7 @@ $(function(){
 
   //ボタンをクリックしたらモーダルを閉じる
    $("#next,#result").click(function(){
+
          $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
       //挿入した<div id="modal-bg"></div>を削除
          $('#quiz-modalbg').remove();
@@ -153,22 +153,14 @@ $(function(){
                   z =  r - y;
                   hp -= z;
                   $("#hit").text(hp);
-
+                  if(hp<1){
+                    modalopen();
+                  }
+                  return;
 });
 
-$('#next').click(function(){
-  $('#hoge').timer(45);
+$('#result').click(function(){
 
-
-             if(hp<1){
-
-               modalopen();
-
-             }else{
-
-               popquestion();
-
-             }
 
      });
 
@@ -177,7 +169,8 @@ $('#next').click(function(){
 
 
       function modalopen(){
-
+clearTimeout($("#hoge").data('id_of_settimeout'));
+$("#hoge").empty();
         //body内の最後に<div id="modal-bg"></div>を挿入
        $("body").append('<div id="modal-bg"></div>');
 
