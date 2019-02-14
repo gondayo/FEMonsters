@@ -26,6 +26,7 @@ $(function(){
    var ItemName = $(this).attr("data-name");
    var ItemNum = $(this).attr("data-num");
    var ItemFlag = $(this).attr("data-flag");
+   var ItemId = $(this).attr("data-id");
 
 
 
@@ -45,6 +46,7 @@ $(function(){
    $("#useitem").text(ItemName);
    $("#usenum").text(ItemNum);
    $("#name").val(ItemName);
+   $("#itemid").val(ItemId);
    //$("#UseNum").val(ItemNum);
       //body内の最後に<div id="modal-bg"></div>を挿入
      $("body").append('<div id="modal-background"></div>');

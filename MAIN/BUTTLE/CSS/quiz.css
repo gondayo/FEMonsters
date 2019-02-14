@@ -48,3 +48,11 @@ body {
     width:100%;
     height:100%;
 }
+
+.progress-bar-warning {
+  background-color: #ffd700;
+}
+
+.progress-bar-danger {
+  background-color: #ff4500;
+}

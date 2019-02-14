@@ -211,7 +211,37 @@ for (let i = choices.length - 1; i >= 0; i--){
 }
 
 $(function() {
+  function modalopen(){
+clearTimeout($("#hoge").data('id_of_settimeout'));
+$("#hoge").empty();
+    //body内の最後に<div id="modal-bg"></div>を挿入
+   $("body").append('<div id="modal-bg"></div>');
 
+   //画面中央を計算する関数を実行
+   modalResize();
+
+   //モーダルウィンドウを表示
+   $("#modal-bg,#modal-main").fadeIn("slow");
+
+  //画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+   $(window).resize(modalResize);
+   function modalResize(){
+
+      var w = $(window).width();
+      var h = $(window).height();
+
+      var cw = $("#modal-main").outerWidth();
+      var ch = $("#modal-main").outerHeight();
+
+      //取得した値をcssに追加する
+          $("#modal-main").css({
+              "left": ((w - cw)/2) + "px",
+              "top": ((h - ch)/2) + "px"
+          });
+   }
+
+
+  }
   $("#hit").text(hp);
   $("#no").text(x);
   $("#t").text(ans);
@@ -306,12 +336,12 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       z =  r - y;
       hp -= z;
       $("#hit").text(hp);
-
       if(hp<1){
 
         modalopen();
 
       }
+
 
     y = 0;
     r = 0;
@@ -321,7 +351,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
   $("#next").on('click',function(){
     $("#no").text(x);
       popquestion();
-$('#hoge').timer(45);
+$('#hoge').timer(timeSet);
 
 
 
@@ -342,7 +372,91 @@ $('#hoge').timer(45);
      var goldUp2 = 2;
      var expUp = 1.5;
 
-     MonsItemJ();
+     switch(monsId){
+       case 1:
+        switch (itemId) {
+          case 0:
+          console.log('mons1＆item0');
+          timeSet = timeSet + monsTime;
+          break;
+
+          case 1:
+          console.log('mons1＆item1');
+          timeSet = timeSet + monsTime + 15;
+          break;
+
+          case 2:
+          console.log('mons1＆item2');
+          getGold = getGold * 1.25;
+          getExp = getExp * 1.25;
+          timeSet = timeSet + monsTime;
+          break;
+
+          case 3:
+          console.log('mons1＆item3');
+          getGold = getGold * 1.5;
+          timeSet = timeSet + monsTime - 15;
+          break;
+        }
+
+      case 2:
+       switch (itemId) {
+         case 0:
+         console.log('mons2＆item0');
+         getGold = getGold * goldUp;
+         getExp = getExp *expUp;
+         break;
+
+         case 1:
+         console.log('mons2＆item1');
+         getGold = getGold * goldUp;
+         getExp = getExp *expUp;
+         timeSet = timeSet + 15;
+         break;
+
+         case 2:
+         console.log('mons2＆item2');
+         getGold = getGold * (goldUp + 1.25 );
+         getExp = getExp *(expUp + 1.25);
+         break;
+
+         case 3:
+         console.log('mons2＆item3');
+         getGold = getGold * (goldUp + 1.5);
+         getExp = getExp *expUp;
+         timeSet = timeSet - 15;
+         break;
+       }
+
+       case 3:
+        switch (itemId) {
+          case 0:
+          console.log('mons3＆item0');
+          getGold = getGold * goldUp2;
+          timeSet = timeSet - 30;
+          break;
+
+          case 1:
+          console.log('mons3＆item1');
+          getGold = getGold * goldUp2;
+          timeSet = timeSet - 30 + 15;
+          break;
+
+          case 2:
+          console.log('mons3＆item2');
+          getGold = getGold * (goldUp2 + 1.25);
+          getExp = getExp * 1.25;
+          timeSet = timeSet - 30;
+          break;
+
+          case 3:
+          console.log('getGold');
+          getGold = getGold * (goldUp2 + 1.5);
+          timeSet = timeSet -45;
+          break;
+        }
+
+     }
 
 </script>
 </head>
@@ -369,7 +483,7 @@ $('#hoge').timer(45);
    <input type = "button" id = "choices3" class="choice" name="choices3" value="">
    <input type = "button" id = "choices4" class="choice" name="choices4" value="">
    <input type = "hidden" name = "answer" value = "">
-  
+
  <div id="quiz-modal">
    <span id = "judge"></span>
    <span id = "answer"></span>

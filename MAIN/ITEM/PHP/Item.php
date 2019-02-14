@@ -111,7 +111,7 @@ try {
             ?>
             <li id="list<?php echo h($x);?>"><span class="itemname<?php echo h($x);?>"><?php echo h($Items["ItemName"]);?></span>
               <span class="itemnum<?php echo h($x);?>"><?php echo h($Items["ItemNum"]);?></span><span class ="k<?php echo h($x);?>">個</span>
-              <button class="use" data-flag="<?php echo h($Items["ItemFlag"]);?>"data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>"></button>
+              <button class="use" data-id="<?php echo h($Items["ItemId"]);?>" data-flag="<?php echo h($Items["ItemFlag"]);?>"data-name="<?php echo h($Items["ItemName"]);?>" data-num="<?php echo h($Items["ItemNum"]);?>"></button>
             </li>
           <?php
             $x++;
@@ -142,6 +142,7 @@ try {
    <div id="modal-window">
 
      <input id="name" type="hidden" name="ItemName" value="">
+     <input id="itemid" type ="hidden" name="ItemId" value="">
    </div>
   </form>
  </body>
