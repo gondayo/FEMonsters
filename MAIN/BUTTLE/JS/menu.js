@@ -12,7 +12,7 @@ $(function(){
       $("body").append('<div id="modal-main2"><input id="retirecheck" type="image"src="../../../PICTURE/retire.png" value="c"><br><input id="gameBack" type="image"src="../../../PICTURE/gameBack.png" value="e"></div>');
       //$("body").append('<div id="modal-main2"><h1>Menu</h1><button id="retirecheck" type = "submit" name = "retireCheck" value = "c" ><img src="../../../PICTURE/retire.png"></button><button id="gameBack" type = "submit" name = "gameBack" value = "e" ><img src="../../../PICTURE/gameBack.png"></button></div>');
       $("body").append('<div id="modal-bg"></div>');
-      $("body").append('<form method="POST"><div id="modal-main3"><p id="checkwrite">経験値とおかねは獲得できません。</p><p id="checkwrite2">MAPへ戻りますか？</p><input id="yesClick" name="yesClick"type="submit" value="d"><br><input id="noClick" type="image"src="../../../PICTURE/nobutton.png" value="f"></div></form>');
+      $("body").append('<form method="POST"><div id="modal-main3"><p id="checkwrite">経験値とお金は獲得できません。</p><p id="checkwrite2">MAPへ戻りますか？</p><input id="yesClick" name="yesClick"type="submit" src="../../../PICTURE/yesbutton.png"value="d"><br><input id="noClick" type="image"src="../../../PICTURE/nobutton.png" value="f"></div></form>');
 
 
     //画面中央を計算す関数を実行
@@ -74,25 +74,10 @@ $(function(){
           });
      }
    });
+
+   $("#yesClick").on("click",function(){
+     var gorld = 0;
+     var exp = 0;
+     location.href  = 'retire.php';
+   });
 });
-<<<<<<< HEAD
-=======
-
-
-$(function(){
-
-  $(document).on("click", "#yesClick",function() {
-    var gold = 0;
-    var exp = 0;
-    location.href = '/MAIN/main.php';
-  });
-});
-
-$(function(){
-  $(document).on("click","#noClick", function() {
-
-    $("#modal-bg,#modal-main3").remove();
-
-  });
-});
->>>>>>> 4d6de380f66a79d740dbf4ae44a80f488760fdcf

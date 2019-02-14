@@ -21,7 +21,7 @@ define('DB_PASSWORD','g015c1316');
 $errorMessage = "";
 
 // 送信ボタンが押された場合
-if (isset($_POST["submit"])){
+if (isset($_POST["send"])){
    //1.ユーザIDの入力チェック
   if(empty($_POST["UserName"])){
     $errorMessage = 'ユーザー名が未入力です。';
@@ -90,6 +90,7 @@ if (isset($_POST["submit"])){
  <!doctype html>
 <html>
  <head>
+   <link href="../CSS/Forgot.css" rel="stylesheet">
    <meta charset="UTF-8">
    <title>パスワードを忘れた場合</title>
  </head>

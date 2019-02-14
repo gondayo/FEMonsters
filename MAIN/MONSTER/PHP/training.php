@@ -71,7 +71,7 @@ try {
  <p>モンスター詳細</p></span>
  <form method="POST">
  <div id="modal-main">
-   <h1>使用確認</h1>
+   <h1>確認</h1>
    <ul>
      <?php
      $x = 1;

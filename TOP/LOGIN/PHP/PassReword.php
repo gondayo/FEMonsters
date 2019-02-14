@@ -48,10 +48,10 @@ if (isset($_POST["send"])){
       $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
       $Pass = strlen($_POST['PassWord']);
       check($Pass);
-      $stmt = $pdo->prepare('UPDATE user SET PassWord = ? WHERE UserName = ');
+      $stmt = $pdo->prepare('UPDATE user SET PassWord = ? WHERE UserName = ?');
       $PassWord = password_hash($PassWord, PASSWORD_DEFAULT);
       $stmt->bindvalue(1,$PassWord);
-      $stmt->bindvalue(2,$_SESSION["NAME"]);
+      $stmt->bindvalue(2,$_SESSION["Name"]);
       $stmt->execute();
 
       header("Location: Return.php");
@@ -70,6 +70,7 @@ if (isset($_POST["send"])){
 <!doctype html>
 <html>
   <head>
+    <link href="../CSS/PassReword.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>パスワード再発行</title>
   </head>
@@ -85,7 +86,7 @@ if (isset($_POST["send"])){
         <label for="PassWord2">パスワードを再度入力してください</label>
         <input type="PassWord" id="PassWord2" name="PassWord2" placeholder="パスワードを入力" value="">
         <br>
-        <inout type="submit" id="send" name="send" value="送信">
+        <input type="submit" id="send" name="send" value="送信">
       </fieldset>
     </form>
     <br>
