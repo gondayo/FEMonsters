@@ -125,7 +125,7 @@ if (isset($_POST["login"])) {
 				<br>
 
 				<br>
-				<a href = "forgot.php">パスワードを忘れた場合</a>
+				<a href = "Forgot.php">パスワードを忘れた場合</a>
 			</fieldset>
 		</form>
 		<br>

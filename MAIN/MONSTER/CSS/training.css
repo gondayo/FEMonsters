@@ -37,6 +37,10 @@ body {
     overflow: hidden;
 }
 
+ul {
+  list-style: none;
+}
+
 .relative {
     position: relative;
     margin: 0;
@@ -49,18 +53,19 @@ body {
 }
 .levelup {
     position: absolute;
-    top: 60px;
+    top: 405px;
+    left: 290px;
 }
 
 .evolution {
     position: absolute;
-    top: 90px;
+    top: 405px;
 }
 
 #currentmonster {
   position: absolute;
-  top : 0%;
-  left: 20%;
+  top : 50%;
+  left: 40%;
 }
 #modal-open {
   color: #cc0000;
