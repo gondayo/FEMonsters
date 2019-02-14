@@ -67,6 +67,9 @@ try {
         $stmt->execute();
         //この時点でアイテム使用フラグをu_itemに送りダンジョンクリア後にフラグ消去のほうが良い？
 
+        $item = $_SESSION["currentitem"]
+        $item_json = json_encode((int)$item, JSON_UNESCAPED_UNICODE);
+
         header("Location: Itemcheck.php");
 
         }else{

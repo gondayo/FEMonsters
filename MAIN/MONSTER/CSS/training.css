@@ -59,8 +59,8 @@ body {
 
 #currentmonster {
   position: absolute;
-  top : 0%;
-  left: 20%;
+  top : 50%;
+  left: 40%;
 }
 #modal-open {
   color: #cc0000;

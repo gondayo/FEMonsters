@@ -37,6 +37,9 @@ if(isset($_POST["yesClick"])) {
   exit();
 }
 
+$mons = $_SESSION["currentmonster"];
+$mons_json = json_encode((int)$mons, JSON_UNESCAPED_UNICODE);
+
 ?>
 <!doctype html>
 <html>
@@ -163,7 +166,7 @@ countdown(totalTime);
 };
 });
 jQuery(function($) {
-$('#hoge').timer(45);
+$('#hoge').timer(timeSet);
 });
 </script>
 
@@ -176,6 +179,7 @@ $('#hoge').timer(45);
 //phpから問題を受け取る
 let array_key_jq = <?php echo $array_key_json; ?>;
 let question_jq = <?php echo $question_json; ?>;
+let mons_jq =  <?php echo $mons_json; ?>;
 
 //問題数
 var x = 0;
@@ -239,6 +243,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       gold = gold + getGold;
       exp = exp + getExp;
 
+      console.log(mons_jq);
       console.log(gold);
 
       $("#answer").text("");
@@ -331,8 +336,7 @@ $('#hoge').timer(timeSet);
 
 });
 
-     var monsId = 3;
-     var itemId = 3;
+     var itemId = 0;
 
      var timeSet = 90;
      var monsTime = 30;
@@ -342,7 +346,7 @@ $('#hoge').timer(timeSet);
      var goldUp2 = 2;
      var expUp = 1.5;
 
-     switch(monsId){
+     switch(mons_jq){
        case 1:
         switch (itemId) {
           case 0:
@@ -367,8 +371,7 @@ $('#hoge').timer(timeSet);
           getGold = getGold * 1.5;
           timeSet = timeSet + monsTime - 15;
           break;
-        }
-
+        }break;
       case 2:
        switch (itemId) {
          case 0:
@@ -396,7 +399,7 @@ $('#hoge').timer(timeSet);
          getExp = getExp *expUp;
          timeSet = timeSet - 15;
          break;
-       }
+       }break;
 
        case 3:
         switch (itemId) {
@@ -424,7 +427,7 @@ $('#hoge').timer(timeSet);
           getGold = getGold * (goldUp2 + 1.5);
           timeSet = timeSet -45;
           break;
-        }
+        }break;
 
      }
 
