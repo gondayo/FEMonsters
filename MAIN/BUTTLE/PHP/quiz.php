@@ -376,11 +376,8 @@ $('#hoge').timer(timeSet);
      var goldUp2 = 2;
      var expUp = 1.5;
 
-<<<<<<< HEAD
+
      switch(mons_jq){
-=======
-     switch(monsId){
->>>>>>> 9c234fd34fa56cc6b66167731a10ddbb73ffc271
        case 1:
         switch (itemId) {
           case 0:
@@ -405,12 +402,9 @@ $('#hoge').timer(timeSet);
           getGold = getGold * 1.5;
           timeSet = timeSet + monsTime - 15;
           break;
-<<<<<<< HEAD
-        }break;
-=======
-        }
 
->>>>>>> 9c234fd34fa56cc6b66167731a10ddbb73ffc271
+        }break;
+
       case 2:
        switch (itemId) {
          case 0:
@@ -438,11 +432,8 @@ $('#hoge').timer(timeSet);
          getExp = getExp *expUp;
          timeSet = timeSet - 15;
          break;
-<<<<<<< HEAD
+
        }break;
-=======
-       }
->>>>>>> 9c234fd34fa56cc6b66167731a10ddbb73ffc271
 
        case 3:
         switch (itemId) {
@@ -470,11 +461,8 @@ $('#hoge').timer(timeSet);
           getGold = getGold * (goldUp2 + 1.5);
           timeSet = timeSet -45;
           break;
-<<<<<<< HEAD
+
         }break;
-=======
-        }
->>>>>>> 9c234fd34fa56cc6b66167731a10ddbb73ffc271
 
      }
 
