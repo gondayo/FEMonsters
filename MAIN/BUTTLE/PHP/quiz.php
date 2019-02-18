@@ -32,10 +32,10 @@ try {
 }
 
 //モータルウィンドウ用画面遷移　
-if(isset($_POST["yesClick"])) {
+/*if(isset($_POST["yesClick"])) {
   header("Location: retire.php");
   exit();
-}
+}*/
 
 $mons = $_SESSION["currentmonster"];
 $mons_json = json_encode((int)$mons, JSON_UNESCAPED_UNICODE);

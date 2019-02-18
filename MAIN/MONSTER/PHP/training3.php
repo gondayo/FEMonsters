@@ -14,7 +14,6 @@ function h($str) {
 }
 
 try {
-
   $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
   $stmt = $pdo->prepare('SELECT * FROM u_monster LEFT OUTER JOIN monster_library ON u_monster.MonsterId = monster_library.MonsterId WHERE UserId = ? ORDER BY u_monster.MonsterId ASC');
   $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
@@ -54,26 +53,25 @@ try {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="../JS/training.js"></script>
   <title>Training</title>
+  <script type="text/javascript">
+  let mons_list = <?php echo $array_mons_list; ?>;
+  </script>
 </head>
 <body>
   <div class="relative">
  <img src="/PICTURE/monsterbackground.png" alt="">
  <input type="image" id="monscheck" src="/MAIN/MONSTER/MONSTERPIC/a.png" name="monster" alt="モンスター">
-<form action="levelcheck.php" method="post">
  <div class="levelup">
-    <input type="image" name="levelup" src="/PICTURE/levelup.png" alt="レベルアップ" id="login">
+    <img src="/PICTURE/levelup.png" alt="レベルアップ" id="login">
  </div>
-</form>
-<form action="evocheck.php" method="post">
  <div class="evolution">
- <input type="image" name="" src="/PICTURE/evolution.png" alt="進化">
+ <img src="/PICTURE/evolution.png" alt="">
  </div>
-</form>
  <span ><img id="currentmonster" src="<?php echo h($cmonster["MonsterPic"]);?>">
  <p>モンスター詳細</p></span>
  <form method="POST">
  <div id="modal-main">
-   <h1>使用確認</h1>
+   <h1>確認</h1>
    <ul>
      <?php
      $x = 1;

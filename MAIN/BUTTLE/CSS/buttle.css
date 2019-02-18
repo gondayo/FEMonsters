@@ -103,15 +103,15 @@
 
 #yesClick{
   position: relative;
-  top: 125px;
+  top: 90px;
   width: 300px;
   height: 72px;
-  background-image: url("../../../PICTURE/yesbutton.png");
+
 }
 
 #noClick{
   position: relative;
-  top: 135px;
+  top: 60px;
   width: 300px;
   height: 72px;
 }
