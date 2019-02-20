@@ -472,7 +472,7 @@ $('#hoge').timer(timeSet);
 
 <div id="modal-main">
   <h1>Result</h1>
-  <form method = "POST"><button type = "submit" name = "yesClick" value = "b">MAPへ戻る</button></form>
+  <form action="main.php" method="POST"><input id="mapback" name="yesClick"type="image" src="../../../PICTURE/MapBack.png"value=""></form>
 </div>
 <input type="image" id="modal-open" src="../../../PICTURE/stop.png" name="メニュー" value="メニュー">
 <div id="hoge">

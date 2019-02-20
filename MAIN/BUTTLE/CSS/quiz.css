@@ -40,6 +40,10 @@
     left:0;
     z-index: 1;
 }
+#mapback{
+  height:50px;
+  text-align: center;
+}
 html {
     height:525px;
 }
