@@ -371,10 +371,8 @@ $('#hoge').timer(timeSet);
      var timeSet = 90;
      var monsTime = 30;
      var getGold = 500;
-     var getExp = 100;
      var goldUp = 1.5;
      var goldUp2 = 2;
-     var expUp = 1.5;
 
 
      switch(mons_jq){
@@ -393,14 +391,13 @@ $('#hoge').timer(timeSet);
           case 2:
           console.log('mons1＆item2');
           getGold = getGold * 1.25;
-          getExp = getExp * 1.25;
-          timeSet = timeSet + monsTime;
+          timeSet = timeSet + monsTime　- 15;
           break;
 
           case 3:
           console.log('mons1＆item3');
           getGold = getGold * 1.5;
-          timeSet = timeSet + monsTime - 15;
+          timeSet = timeSet + monsTime - 30;
           break;
 
         }break;
@@ -410,27 +407,25 @@ $('#hoge').timer(timeSet);
          case 0:
          console.log('mons2＆item0');
          getGold = getGold * goldUp;
-         getExp = getExp *expUp;
+         timeSet = timeSet - 15;
          break;
 
          case 1:
          console.log('mons2＆item1');
          getGold = getGold * goldUp;
-         getExp = getExp *expUp;
-         timeSet = timeSet + 15;
          break;
 
          case 2:
          console.log('mons2＆item2');
          getGold = getGold * (goldUp + 1.25 );
-         getExp = getExp *(expUp + 1.25);
+         timeSet = timeSet - 30;
          break;
 
          case 3:
          console.log('mons2＆item3');
          getGold = getGold * (goldUp + 1.5);
          getExp = getExp *expUp;
-         timeSet = timeSet - 15;
+         timeSet = timeSet - 45;
          break;
 
        }break;
@@ -452,14 +447,13 @@ $('#hoge').timer(timeSet);
           case 2:
           console.log('mons3＆item2');
           getGold = getGold * (goldUp2 + 1.25);
-          getExp = getExp * 1.25;
-          timeSet = timeSet - 30;
+          timeSet = timeSet - 45;
           break;
 
           case 3:
           console.log('getGold');
           getGold = getGold * (goldUp2 + 1.5);
-          timeSet = timeSet -45;
+          timeSet = timeSet - 60;
           break;
 
         }break;

@@ -40,25 +40,12 @@ try {
 <body>
 <script src="main.js"></script>
 <header>
-  <div id="modal-main">
-    <h1>Manual</h1>
-    <p>aaa</p>
-    <p>bbb</p>
-    <p>ccc</p>
-    <p>aaa</p>
-    <p>bbb</p>
-    <p>ccc</p>
-    <p>aaa</p>
-    <p>bbb</p>
-    <p>ccc</p>
-  </div>
 <div class="header" id="contents">
 <tr>
   <a href="Logout.php">
     <img src="/PICTURE/shortlogo.png" alt="FEMonstars">
   </a>
   <a href="/MAIN/USER/PHP/userdateil.php">ユーザー名：<?php echo($User["UserName"]);?> </a>
-  <div id="modal-open" style="display:inline;">Manual</div>
 </tr>
 </div>
 </header>
