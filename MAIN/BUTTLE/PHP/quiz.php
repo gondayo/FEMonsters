@@ -282,7 +282,8 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
-        $("#result").val(y);
+        $("#result").val(getGold);
+
 
         $('#result').click(function(){
           $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
@@ -306,7 +307,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
-        $("#result").val(y);
+        $("#result").val(getGold);
 
         $('#result').click(function(){
           $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
@@ -357,7 +358,8 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
 
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
-
+        $("#result").val(getGold);
+        
         modalopen();
 
         $('#result').click(function(){
@@ -366,6 +368,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
               $('#quiz-modalbg').remove();
 
         });
+
           });
 
       }
