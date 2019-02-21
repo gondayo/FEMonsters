@@ -271,9 +271,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       r++;
 
       gold = gold + getGold;
-      exp = exp + getExp;
 
-      console.log(mons_jq);
       console.log(gold);
 
       $("#answer").text("");
@@ -466,7 +464,7 @@ $('#hoge').timer(timeSet);
 
 <div id="modal-main">
   <h1>Result</h1>
-  <form action="main.php" method="POST"><input id="mapback" name="yesClick"type="image" src="../../../PICTURE/MapBack.png"value=""></form>
+  <form action="retire.php" method="POST"><input id="mapback" name="yesClick"type="image" src="../../../PICTURE/MapBack.png"value=""></form>
 </div>
 <input type="image" id="modal-open" src="../../../PICTURE/stop.png" name="メニュー" value="メニュー">
 <div id="hoge">

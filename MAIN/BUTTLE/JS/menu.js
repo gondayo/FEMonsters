@@ -76,8 +76,8 @@ $(function(){
    });
 
    $("#yesClick").on("click",function(){
-     var gorld = 0;
-     var exp = 0;
+     var getGold = 0;
+     console.log(getGold);
      location.href  = 'retire.php';
    });
 });
