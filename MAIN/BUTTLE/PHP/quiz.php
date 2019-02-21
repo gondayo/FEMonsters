@@ -355,7 +355,18 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       $("#hit").text(hp);
       if(hp<1){
 
+        $("#next").remove();
+        $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
+
         modalopen();
+
+        $('#result').click(function(){
+          $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
+          //挿入した<div id="modal-bg"></div>を削除
+              $('#quiz-modalbg').remove();
+
+        });
+          });
 
       }
 
