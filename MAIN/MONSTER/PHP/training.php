@@ -42,7 +42,17 @@ try {
 
   }
 
+  if(isset($_POST["levelup"])){
+    try {
+      $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
+      $sql = "SELECT * FROM exp_table";
+      $exp = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC | PDO::FETCH_UNIQUE);
 
+
+    } catch (Exception $e) {
+      $errorMessage = $e->getMessage();
+    }
+  }
 
   ?>
 
@@ -66,11 +76,10 @@ try {
 </form>
 <form action="evocheck.php" method="post">
  <div class="evolution">
- <input type="image" name="" src="/PICTURE/evolution.png" alt="進化">
+ <input type="image" name="evolution" src="/PICTURE/evolution.png" alt="進化">
  </div>
 </form>
- <span ><img id="currentmonster" src="<?php echo h($cmonster["MonsterPic"]);?>">
- <p>モンスター詳細</p></span>
+ <span><img id="<?php echo h($cmonster["CurrentMonster"]);?>" src="<?php echo h($cmonster["MonsterPic"]);?>"></span>
  <form method="POST">
  <div id="modal-main">
    <h1>使用確認</h1>

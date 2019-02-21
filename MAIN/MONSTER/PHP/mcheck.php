@@ -7,7 +7,7 @@
  <html>
    <head>
      <meta charset="UTF-8">
-     <link href="/MAIN/ITEM/CSS/Itemcheck.css" rel="stylesheet">
+     <link href="../CSS/mcheck.css" rel="stylesheet">
    </head>
    <body>
     <div id="sikaku">
