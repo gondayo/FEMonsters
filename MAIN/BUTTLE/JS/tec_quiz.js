@@ -192,14 +192,5 @@ $(function(){
                   return;
 });
 
-$('#result').click(function(){
-
-
-     });
-
-
-
-
-
 
 });

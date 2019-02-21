@@ -283,6 +283,14 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
         $("#next").remove();
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
         $("#result").val(y);
+
+        $('#result').click(function(){
+          $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
+          //挿入した<div id="modal-bg"></div>を削除
+              $('#quiz-modalbg').remove();
+
+        });
+          });
       }
 
     } else {
@@ -300,14 +308,20 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
         $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
         $("#result").val(y);
 
+        $('#result').click(function(){
+          $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
+          //挿入した<div id="modal-bg"></div>を削除
+              $('#quiz-modalbg').remove();
+
+        });
+          });
       }
 
     }
     if(x == 10){
 
       z =  r - y;
-      hp -= z;
-      $("#hit").text(hp);
+      //$("#hit").text(hp);
 
       //body内の最後に<div id="modal-bg"></div>を挿入
       $("body").append('<div id="modal-bg"></div>');
@@ -354,14 +368,13 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
   $("#next").on('click',function(){
     $("#no").text(x);
       popquestion();
-$('#hoge').timer(timeSet);
+    $('#hoge').timer(timeSet);
 
 
 
 
 
   });
-
 });
 
      var itemId = 0;

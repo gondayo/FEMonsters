@@ -56,6 +56,7 @@ $(function(){
         $("#noClick").on("click", function() {
 
           $("#modal-bg,#modal-main3").remove();
+
         });
     //画面の左上からmenu-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
      $(window).resize(modalResize);
@@ -78,6 +79,6 @@ $(function(){
    $("#yesClick").on("click",function(){
      var getGold = 0;
      console.log(getGold);
-     location.href  = 'retire.php';
+     //.href  = 'retire.php';
    });
 });
