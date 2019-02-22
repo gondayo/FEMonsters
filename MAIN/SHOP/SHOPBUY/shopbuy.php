@@ -110,9 +110,10 @@ try {
                   $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
                   $stmt->execute();
                   //購入したモンスターを登録
-                  $stmt = $pdo->prepare('INSERT INTO u_monster(UserId,MonsterId,MShopFlag) VALUES(?,?,1)');
+                  $stmt = $pdo->prepare('INSERT INTO u_monster(UserId,MonsterId,MShopFlag,Frag) VALUES(?,?,1,?)');
                   $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
                   $stmt->bindvalue(2,(int)$id,PDO::PARAM_INT);
+                  $stmt->bindvalue(3,(int)$id,PDO::PARAM_INT);
                   $stmt->execute();
 
                   header("Location: buycheck.php");

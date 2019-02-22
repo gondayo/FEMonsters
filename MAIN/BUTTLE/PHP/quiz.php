@@ -46,8 +46,8 @@ if(isset($_POST["result"])){
   $stmt = $pdo->prepare('SELECT Gold FROM user WHERE UserId = ?');
   $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
   $stmt->execute();
-  $getgold2["Gold"] = $stmt->fetch(PDO::FETCH_ASSOC);
-  $getgold2["Gold"] += $getgold2;
+  $getgold2 = $stmt->fetch(PDO::FETCH_ASSOC);
+  $getgold2["Gold"] += $getgold1;
   $stmt = $pdo->prepare('UPDATE user SET Gold = ? WHERE UserId = ?');
   $stmt->bindvalue(1,(int)$getgold2["Gold"],PDO::PARAM_INT);
   $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
@@ -371,7 +371,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       if(hp<1){
 
         $("#next").remove();
-        $("#answer").append('<form method="POST"><button  id = "result" name = "result" value = "">終了</button></form>');
+        $("#answer").append('<form method="POST"><input type=submit id = "result" name = "result" value = "">終了</button></form>');
         $("#result").val(getGold);
 
         modalopen();

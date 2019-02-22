@@ -74,6 +74,10 @@ if (isset($_POST["signUp"])) {
             $stmt->bindvalue(5,(int)$UserId,PDO::PARAM_INT);
             $stmt->execute();
 
+            $stmt = $pdo->prepare("INSERT INTO u_monster(UserId, MonsterId,Flag) VALUES(?,1,1)");
+            $stmt->bindvalue(1,(int)$UserId,PDO::PARAM_INT);
+            $stmt->execute();
+
             header("Location: siReturn.php");
             exit();
 
