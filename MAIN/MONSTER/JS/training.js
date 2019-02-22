@@ -1,5 +1,5 @@
 $(function(){
-  $("#currentmonster").on('click',function(){
+  $(".currentmonster").on('click',function(){
 
 
 

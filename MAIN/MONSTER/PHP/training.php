@@ -20,11 +20,19 @@ try {
   $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
   $stmt->execute();
 
+
   //  $monster_json = jsone_encord($monster, JSON_UNESCAPED_UNICODE);
   $st = $pdo->prepare('SELECT * FROM monster_library WHERE MonsterId = ?');
   $st->bindvalue(1,(int)$_SESSION["currentmonster"],PDO::PARAM_INT);
   $st->execute();
   $cmonster = $st->fetch(PDO::FETCH_ASSOC);
+
+  $sm = $pdo->prepare('SELECT MonsterLevel FROM u_monster WHERE UserId = ? AND MonsterId = ?');
+  $sm->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
+  $sm->bindvalue(2,(int)$_SESSION["currentmonster"],PDO::PARAM_INT);
+  $sm->execute();
+  $monsterlevel = $sm->fetch(PDO::FETCH_ASSOC);
+
 } catch (Exception $e) {
   $errorMessage = $e->getMessage();
 }
@@ -35,6 +43,12 @@ try {
           $st->bindvalue(1,(int)$_SESSION["currentmonster"],PDO::PARAM_INT);
           $st->execute();
           $cmonster = $st->fetch(PDO::FETCH_ASSOC);
+
+          $sm = $pdo->prepare('SELECT MonsterLevel FROM u_monster WHERE UserId = ? AND MonsterId = ?');
+          $sm->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
+          $sm->bindvalue(2,(int)$_SESSION["currentmonster"],PDO::PARAM_INT);
+          $sm->execute();
+          $monsterlevel = $sm->fetch(PDO::FETCH_ASSOC);
           header("Location: mcheck.php");
         } catch (Exception $e) {
           $errorMessage = $e->getMessage();
@@ -44,11 +58,38 @@ try {
 
   if(isset($_POST["levelup"])){
     try {
-      $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>FALSE));
-      $sql = "SELECT * FROM exp_table";
-      $exp = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC | PDO::FETCH_UNIQUE);
+      $level = (int)$_POST["levelup"];
+      if($level < 10){
+      $level++;
+      $stmt = $pdo->prepare('UPDATE u_monster SET MonsterLevel = ? WHERE UserId = ? AND MonsterId = ?');
+      $stmt->bindvalue(1,(int)$level,PDO::PARAM_INT);
+      $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
+      $stmt->bindvalue(3,(int)$_SESSION["currentmonster"],PDO::PARAM_INT);
+      $stmt->execute();
+      header("Location: levelcheck.php");
+    }else{
+      throw new Exception('これ以上レベルを上げることが出来ません。');
+    }
+    } catch (Exception $e) {
+      $errorMessage = $e->getMessage();
+    }
+  }
 
-
+  if(isset($_POST["evolution"])){
+    try {
+      $evolution = (int)$_POST["evolution"];
+      if($evolution < 7){
+        $evolution += 3;
+        $stmt = $pdo->prepare('UPDATE u_monster SET MonsterId = ? WHERE UserId = ? AND MonsterId = ?');
+        $stmt->bindvalue(1,(int)$evolution,PDO::PARAM_INT);
+        $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
+        $stmt->bindvalue(3,(int)$_SESSION["currentmonster"],PDO::PARAM_INT);
+        $stmt->execute();
+        $_SESSION["currentmonster"] = $evolution;
+        header("Location: evocheck.php");
+      }else{
+        throw new Exception('これ以上進化することが出来ません。');
+      }
     } catch (Exception $e) {
       $errorMessage = $e->getMessage();
     }
@@ -66,23 +107,27 @@ try {
   <title>Training</title>
 </head>
 <body>
+
   <div class="relative">
+  <div id="error"><font color="#ff0000"><?php echo h($errorMessage); ?></font></div>
  <img src="/PICTURE/monsterbackground.png" alt="">
  <input type="image" id="monscheck" src="/MAIN/MONSTER/MONSTERPIC/a.png" name="monster" alt="モンスター">
-<form action="levelcheck.php" method="post">
+<form method="post">
  <div class="levelup">
-    <input type="image" name="levelup" src="/PICTURE/levelup.png" alt="レベルアップ" id="login">
+    <input type="image" src="/PICTURE/levelup.png" alt="レベルアップ">
+    <input type="hidden" name="levelup" value="<?php echo h($monsterlevel["MonsterLevel"]);?>">
  </div>
 </form>
-<form action="evocheck.php" method="post">
+<form  method="post">
  <div class="evolution">
- <input type="image" name="evolution" src="/PICTURE/evolution.png" alt="進化">
+   <input type="image"  src="/PICTURE/evolution.png" alt="進化">
+   <input type="hidden" name="evolution" value="<?php echo h($_SESSION["currentmonster"]);?>">
  </div>
 </form>
- <span><img id="<?php echo h($cmonster["CurrentMonster"]);?>" src="<?php echo h($cmonster["MonsterPic"]);?>"></span>
+ <span><img id="<?php echo h($cmonster["CurrentMonster"]);?>" class="currentmonster" src="<?php echo h($cmonster["MonsterPic"]);?>"></span>
  <form method="POST">
  <div id="modal-main">
-   <h1>使用確認</h1>
+   <h1>確認</h1>
    <ul>
      <?php
      $x = 1;
