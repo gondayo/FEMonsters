@@ -297,8 +297,8 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       if(x == 10){
 
         $("#next").remove();
-        $("#answer").append('<form method="POST"><input type="submit" id = "result" name = "result" value = "">終了</button></form>');
-        $("#result").val(getGold);
+        $("#answer").append('<form method="POST"><button id = "result" name = "result" value = "">終了</button></form>');
+        $("#result").val(gold);
 
 
         $('#result').click(function(){
@@ -316,14 +316,15 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       x++;
       r++;
 
+      gold = gold + 0;
 
       $("#result").val(y);
 
       if(x == 10){
 
         $("#next").remove();
-        $("#answer").append('<form method="POST"><input type="submit" id = "result" name = "result" value = "">終了</button></form>');
-        $("#result").val(getGold);
+        $("#answer").append('<form method="POST"><button id = "result" name = "result" value = "">終了</button></form>');
+        $("#result").val(gold);
 
         $('#result').click(function(){
           $("#quiz-modal,#quiz-modalbg").fadeOut("slow",function(){
@@ -373,8 +374,8 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       if(hp<1){
 
         $("#next").remove();
-        $("#answer").append('<form method="POST"><input type="submit" id = "result" name = "result" value = "">終了</button></form>');
-        $("#result").val(getGold);
+        $("#answer").append('<form method="POST"><button id = "result" name = "result" value = "">終了</button></form>');
+        $("#result").val(gold);
 
         modalopen();
 
