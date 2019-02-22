@@ -38,7 +38,6 @@ try {
 </head>
 <link rel="stylesheet" type="text/css" href="/MAIN/main.css">
 <body>
-<script src="main.js"></script>
 <header>
 <div class="header" id="contents">
 <tr>
