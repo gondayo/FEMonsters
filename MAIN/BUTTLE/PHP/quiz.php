@@ -40,6 +40,20 @@ try {
 $mons = $_SESSION["currentmonster"];
 $mons_json = json_encode((int)$mons, JSON_UNESCAPED_UNICODE);
 
+if(isset($_POST["result"])){
+  $getgold1 = (int)$_POST["result"];
+
+  $stmt = $pdo->prepare('SELECT Gold FROM user WHERE UserId = ?');
+  $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
+  $stmt->execute();
+  $getgold2["Gold"] = $stmt->fetch(PDO::FETCH_ASSOC);
+  $getgold2["Gold"] += $getgold2;
+  $stmt = $pdo->prepare('UPDATE user SET Gold = ? WHERE UserId = ?');
+  $stmt->bindvalue(1,(int)$getgold2["Gold"],PDO::PARAM_INT);
+  $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
+  $stmt->execute();
+}
+
 ?>
 <!doctype html>
 <html>
@@ -281,7 +295,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       if(x == 10){
 
         $("#next").remove();
-        $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
+        $("#answer").append('<form method="POST"><button  id = "result" name = "result" value = "">終了</button></form>');
         $("#result").val(getGold);
 
 
@@ -306,7 +320,7 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       if(x == 10){
 
         $("#next").remove();
-        $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
+        $("#answer").append('<form method="POST"><button  id = "result" name = "result" value = "">終了</button></form>');
         $("#result").val(getGold);
 
         $('#result').click(function(){
@@ -357,9 +371,9 @@ clearTimeout($("#hoge").data('id_of_settimeout'));
       if(hp<1){
 
         $("#next").remove();
-        $("#answer").append('<button  id = "result" name = "result" value = "">終了</button>');
+        $("#answer").append('<form method="POST"><button  id = "result" name = "result" value = "">終了</button></form>');
         $("#result").val(getGold);
-        
+
         modalopen();
 
         $('#result').click(function(){
