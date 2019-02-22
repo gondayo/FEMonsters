@@ -109,11 +109,11 @@ $(function(){
         var w = $(window).width();
       var h = $(window).height();
 
-        var cw = $("#modal-main").outerWidth();
-       var ch = $("#modal-main").outerHeight();
+        var cw = $("#quiz-modal").outerWidth();
+       var ch = $("#quiz-modal").outerHeight();
 
     //取得した値をcssに追加する
-        $("#modal-main").css({
+        $("#quiz-modal").css({
             "left": ((w - cw)/2) + "px",
             "top": ((h - ch)/2) + "px"
       });

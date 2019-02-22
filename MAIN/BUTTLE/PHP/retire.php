@@ -13,7 +13,7 @@ session_start();
   </head>
   <body>
    <div id="sikaku">
-    <span id="retire">ダンジョンから撤退しました…</span>
+    <span id="retire">ダンジョンから退出しました</span>
     <a id="back" href="/MAIN/MAP/HTML/Map.html">戻る</a>
    </div>
   </body>

@@ -76,7 +76,11 @@ if (isset($_POST["login"])) {
 					$_SESSION["NAME"] = $row['UserName'];
 					//$_SESSION["UID"] = $auth;
 					$_SESSION["UID"] = $row['UserId'];
-					$_SESSION["currentmonster"] = 1;
+					$st = $pdo->prepare('SELECT MonsterId FROM u_monster WHERE UserId = ? AND MShopFlag = 0');
+				  $st->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
+				  $st->execute();
+				  $umonster = $st->fetch(PDO::FETCH_ASSOC);
+					$_SESSION["currentmonster"] = $umonster["MonsterId"];
 					header("Location: /MAIN/main.php");  // メイン画面へ遷移
 					exit();  // 処理終了
 				} else {
