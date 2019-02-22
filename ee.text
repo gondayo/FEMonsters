@@ -1,0 +1,13 @@
+if(isset($_POST["form中のinputタグのnameを指定"])){
+  $何か変数1 = (int)$_POST["form中のinputタグのnameを指定"];
+
+  $stmt = $pdo->prepare('SELECT Gold FROM user WHERE UserId = ?');
+  $stmt->bindvalue(1,(int)$_SESSION["UID"],PDO::PARAM_INT);
+  $stmt->execute();
+  $何かの変数2 = $stmt->fetch(PDO::FETCH_ASSOC);
+  $何かの変数2["Gold"] += $何かの変数1;
+  $stmt = $pdo->prepare('UPDATE user SET Gold = ? WHERE UserId = ?');
+  $stmt->bindvalue(1,(int)$何かの変数2["Gold"],PDO::PARAM_INT);
+  $stmt->bindvalue(2,(int)$_SESSION["UID"],PDO::PARAM_INT);
+  $stmt->execute();
+}
